@@ -1,34 +1,27 @@
-import React, { Component } from 'react';
+import React, { useState } from 'react';
 
-class TextBox extends Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      value: '',
-    };
-  }
+function TextBox ({ onChange}) {
+  const [value, setValue] = useState('');
 
-  handleInputChange = (event) => {
-    const { name, value } = event.target;
-    this.setState({ [name]: value });
+  const handleChange = (event) => {
+    const value = event.target.value;
+    setValue(value);
+    onChange(value);
   };
 
-  render() {
-    return (
-      <form>
-        <div>
-          <input
-            type="text"
-            id="value"
-            name="value"
-            value={this.state.value}
-            onChange={this.handleInputChange}
-            required
-          />
-        </div>
-      </form>
-    );
-  }
+  return (
+    <form>
+      <div>
+        <input
+          type="text"
+          id="value"
+          name="value"
+          value={value}
+          onInput={handleChange}
+        />
+      </div>
+    </form>
+  );
 }
 
 export default TextBox;
