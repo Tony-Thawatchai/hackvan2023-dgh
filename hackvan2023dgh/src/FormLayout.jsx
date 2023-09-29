@@ -20,6 +20,7 @@ function FormLayout(props) {
     <div className="form-layout">
       // {props.children}
       <FormComponent onSubmit={handleFormSubmit} />
+      <p>{formData}</p>
     </div>
   );
 }

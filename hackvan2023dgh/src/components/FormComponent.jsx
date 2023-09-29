@@ -25,7 +25,7 @@ const FormComponent = ({ onSubmit }) => {
     address: '',
     community: '',
   });
-  const [familyMembers, setFamilyMembers] = useState([initialFamilyMember]);
+  const [familyMembers, setFamilyMembers] = useState([{ idType: '', idNumber: '', birthYear: '', sex: ''}]);
   const handleSubmit = (e) => {
     e.preventDefault();
 
@@ -49,7 +49,7 @@ const FormComponent = ({ onSubmit }) => {
   };
 
   const handleAddFamilyMember = () => {
-    setFamilyMembers([...familyMembers, initialFamilyMember]);
+    setFamilyMembers([...familyMembers, { idType: '', idNumber: '', birthYear: '', sex: ''}]);
   };
 
   return (
