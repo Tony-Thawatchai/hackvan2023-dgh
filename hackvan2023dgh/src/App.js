@@ -14,14 +14,14 @@ function App() {
   }
 
   const [searchTerm, setSearchTerm] = useState(null);
-  
+
   const [searchResults, setSearchResults] = useState(null);
 
   const [inputText, setInputText] = useState('');
   const handleInput = (value) => {
     setInputText(value);
   }
-  
+
   //  const getResult = (value) => {
   //   console.log(value);
   //   setSearchTerm(value);
@@ -32,8 +32,9 @@ function App() {
     // fetch from API
     const fetchItems = async () => {
       try {
+        console.log(`${process.env.REACT_APP_API_PORT}/client/getone/address/${inputText}`);
         const response = await fetch(
-          `http://localhost:3000/client/getone/address/${inputText}`
+          `${process.env.REACT_APP_API_PORT}/client/getone/address/${inputText}`
         );
 
         if (!response.ok) {
