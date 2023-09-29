@@ -18,7 +18,7 @@ const initialFamilyMember = {
   sex: '',
 };
 
-const FormComponent = () => {
+const FormComponent = ({ onSubmit }) => {
   const [primaryContact, setPrimaryContact] = useState({
     name: '',
     phoneNumber: '',
@@ -26,6 +26,17 @@ const FormComponent = () => {
     community: '',
   });
   const [familyMembers, setFamilyMembers] = useState([initialFamilyMember]);
+  const handleSubmit = (e) => {
+    e.preventDefault();
+
+    // Construct the form data object
+    const formData = {
+      primaryContact,
+      familyMembers,
+    };
+
+    onSubmit(formData);
+  }
 
   const handlePrimaryContactChange = (field, value) => {
     setPrimaryContact({ ...primaryContact, [field]: value });
@@ -42,7 +53,7 @@ const FormComponent = () => {
   };
 
   return (
-    <form>
+    <form onSubmit={handleSubmit}>
       <Typography variant="h5">Primary Contact Information</Typography>
       <TextField
         label="Primary contact Name"
@@ -69,9 +80,9 @@ const FormComponent = () => {
           value={primaryContact.community}
           onChange={(e) => handlePrimaryContactChange('community', e.target.value)}
         >
-          <MenuItem value="Community A">Community A</MenuItem>
-          <MenuItem value="Community B">Community B</MenuItem>
-          <MenuItem value="Community C">Community C</MenuItem>
+          <MenuItem value="Edmonds">Edmonds</MenuItem>
+          <MenuItem value="Burnaby">Burnaby</MenuItem>
+          <MenuItem value="Other">Other</MenuItem>
         </Select>
       </FormControl>
 
@@ -79,16 +90,21 @@ const FormComponent = () => {
       {familyMembers.map((familyMember, index) => (
         <Grid container spacing={2} key={index}>
           <Grid item xs={3}>
-            <TextField
-              label="ID type"
-              value={familyMember.idType}
-              onChange={(e) => handleFamilyMemberChange(index, 'idType', e.target.value)}
-              fullWidth
-            />
+            <FormControl fullWidth>
+              <InputLabel>ID type</InputLabel>
+              <Select
+                value={familyMember.idType}
+                onChange={(e) => handleFamilyMemberChange(index, 'idType', e.target.value)}
+              >
+                <MenuItem value="BCID">BCID</MenuItem>
+                <MenuItem value="Drivers License">Drivers License</MenuItem>
+                <MenuItem value="Other">Other</MenuItem>
+              </Select>
+            </FormControl>
           </Grid>
           <Grid item xs={3}>
             <TextField
-              label="ID number"
+              label="ID last 4 digits"
               value={familyMember.idNumber}
               onChange={(e) => handleFamilyMemberChange(index, 'idNumber', e.target.value)}
               fullWidth
@@ -130,3 +146,4 @@ const FormComponent = () => {
 };
 
 export default FormComponent;
+
