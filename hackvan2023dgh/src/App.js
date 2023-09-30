@@ -2,6 +2,7 @@ import './App.css';
 import { useState } from 'react';
 import ButtonBar from './components/ButtonBar';
 import TextField from "@mui/material/TextField";
+import NameCard from './components/NameCard';
 
 function App() {
   const buttonItems = ["name","address","phone"];

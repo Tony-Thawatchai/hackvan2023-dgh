@@ -2,12 +2,18 @@ import dotenv from "dotenv";
 import express from "express";
 import mongoose from "mongoose";
 import clientRoute from "./routes/client.js";
+import cors from "cors";
 
 dotenv.config();
 
 const app = express();
 
 const port = 3000;
+
+// Allow requests from http://localhost:3001
+const corsOptions = {
+    origin: 'http://localhost:3001',
+  };
 
 mongoose.connect(process.env.DB_URL, { useNewUrlParser: true , useUnifiedTopology: true});
 const db = mongoose.connection;
@@ -18,7 +24,8 @@ db.once("open", function () {
   console.log("connected to db");
 });
 
-app.use(express.json());
+app.use(cors(corsOptions));
+// app.use(express.json());
 
 // const clientRoute = require('./routes/client');
 app.use("/client", clientRoute);
