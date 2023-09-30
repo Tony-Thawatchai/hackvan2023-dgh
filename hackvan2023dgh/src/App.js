@@ -7,7 +7,7 @@ import NameCard from "./components/NameCard";
 import CheckInLayout from "./CheckInLayout";
 
 function App() {
-  const buttonItems = ["Check in", "Update data", "New Client"];
+  const buttonItems = ["Check in", "New Client","Update data"];
   const [selectedValue, setSelectedValue] = useState("");
   const handleButtonClick = (value) => {
     setSelectedValue(value);
@@ -16,7 +16,7 @@ function App() {
   return (
     <div className="main">
       {buttonItems.map((item) => (
-        <button className="button" onClick={() => handleButtonClick(item)}>
+        <button key={item} className="button" onClick={() => handleButtonClick(item)}>
           {item}
         </button>
       ))}
