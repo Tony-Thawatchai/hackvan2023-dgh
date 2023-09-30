@@ -13,7 +13,7 @@ const port = 3000;
 
 // Allow requests from http://localhost:3001
 const corsOptions = {
-    origin: 'http://localhost:3001',
+    origin: '*'
   };
 
 mongoose.connect(process.env.DB_URL, { useNewUrlParser: true , useUnifiedTopology: true});

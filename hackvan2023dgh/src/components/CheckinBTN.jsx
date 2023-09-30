@@ -6,7 +6,8 @@ function CheckinBTN({ data }) {
   console.log(data._id);
   const handleClick = async () => {
     const dateString = new Date().toLocaleDateString().toString();
-    const res = await fetch(`http://localhost:3001/client/update//${data._id}`, {
+    // const res = await fetch(`http://localhost:3000/client/update//${data._id}`, {
+    const res = await fetch(`${process.env.REACT_APP_API_PORT}/client/update//${data._id}`, {
       method: "PATCH",
       headers: {
         "Content-Type": "application/json",
