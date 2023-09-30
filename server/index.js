@@ -14,6 +14,7 @@ const port = 3000;
 // Allow requests from http://localhost:3001
 const corsOptions = {
     origin: '*'
+    
   };
 // hola amiko
 mongoose.connect(process.env.DB_URL, { useNewUrlParser: true , useUnifiedTopology: true});
