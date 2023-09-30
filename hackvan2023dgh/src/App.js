@@ -5,6 +5,7 @@ import ButtonBar from "./components/ButtonBar";
 import TextField from "@mui/material/TextField";
 import NameCard from "./components/NameCard";
 import CheckInLayout from "./CheckInLayout";
+import FormLayout from "./FormLayout";
 
 function App() {
   const buttonItems = ["Check in", "New Client","Update data"];
@@ -21,6 +22,7 @@ function App() {
         </button>
       ))}
       {selectedValue === "Check in" && <CheckInLayout />}
+      {selectedValue === "New Client" && <FormLayout />}
     </div>
   );
 }
