@@ -15,7 +15,7 @@ const port = 3000;
 const corsOptions = {
     origin: '*'
   };
-
+// hola amiko
 mongoose.connect(process.env.DB_URL, { useNewUrlParser: true , useUnifiedTopology: true});
 const db = mongoose.connection;
 
