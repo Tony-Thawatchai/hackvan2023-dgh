@@ -1,16 +1,26 @@
-import logo from "./logo.svg";
-import "./App.css";
-import ButtonBar from "./components/ButtonBar";
-import NameCard from "./components/NameCard";
-import SearchBar from "./components/SearchBar";
+
+import './App.css';
 import { useState, useEffect } from "react";
 import { set } from "mongoose";
+import ButtonBar from './components/ButtonBar';
+import TextField from "@mui/material/TextField";
+import NameCard from './components/NameCard';
 
 function App() {
-  const sliderItems = ["name", "address", "phone"];
-  const [searchTerm, setSearchTerm] = useState("");
+  const buttonItems = ["name","address","phone"];
+  const [selectedValue, setSelectedValue] = useState('');
+  const handleButtonClick = (value) => {
+    setSelectedValue(value);
+  }
+  
   const [searchResults, setSearchResults] = useState(null);
-  const getResult = (value) => {
+
+  const [inputText, setInputText] = useState('');
+  const handleInput = (value) => {
+    setInputText(value);
+  }
+  
+   const getResult = (value) => {
     console.log(value);
     setSearchTerm(value);
   };
@@ -21,7 +31,7 @@ function App() {
     const fetchItems = async () => {
       try {
         const response = await fetch(
-          `http://localhost:3000/client/getone/address/${searchTerm}`
+          `http://localhost:3000/client/getone/address/${inputText}`
         );
 
         if (!response.ok) {
@@ -36,16 +46,28 @@ function App() {
     };
 
     // Only fetch when searchTerm changes
-    if (searchTerm !== "") {
+    if (inputText !== "") {
       fetchItems();
     }
-  }, [searchTerm]);
+  }, [inputText]);
+
   return (
-    <div className="App">
-      <h1>Slider Button</h1>
-      <ButtonBar values={sliderItems} />
-      <SearchBar onChange={getResult} />
-      {searchResults != null ? <NameCard data={searchResults} /> : null}
+    <div className="main">
+      <h1>Client List</h1>
+      <ButtonBar values={buttonItems} onSelect={handleButtonClick} />
+      <div className="search">
+        <TextField
+          id="outlined-basic"
+          onChange={(event: React.ChangeEvent<HTMLInputElement>) => handleInput(event.target.value)}
+          variant="outlined"
+          fullWidth
+          label="Search"
+        />
+      </div>
+      <p>Category: {selectedValue}</p>
+
+      {inputText != null ? <NameCard data={inputText} /> : null}
+
     </div>
   );
 }
