@@ -1,5 +1,7 @@
+
 import './App.css';
-import { useState } from 'react';
+import { useState, useEffect } from "react";
+import { set } from "mongoose";
 import ButtonBar from './components/ButtonBar';
 import TextField from "@mui/material/TextField";
 import NameCard from './components/NameCard';
@@ -10,11 +12,44 @@ function App() {
   const handleButtonClick = (value) => {
     setSelectedValue(value);
   }
+  
+  const [searchResults, setSearchResults] = useState(null);
 
   const [inputText, setInputText] = useState('');
   const handleInput = (value) => {
     setInputText(value);
   }
+  
+   const getResult = (value) => {
+    console.log(value);
+    setSearchTerm(value);
+  };
+  console.log(searchResults);
+  useEffect(() => {
+    setSearchResults(null);
+    // fetch from API
+    const fetchItems = async () => {
+      try {
+        const response = await fetch(
+          `http://localhost:3000/client/getone/address/${inputText}`
+        );
+
+        if (!response.ok) {
+          throw new Error(`HTTP error! Status: ${response.status}`);
+        }
+
+        const data = await response.json();
+        setSearchResults(data);
+      } catch (error) {
+        console.error("Error fetching data:", error);
+      }
+    };
+
+    // Only fetch when searchTerm changes
+    if (inputText !== "") {
+      fetchItems();
+    }
+  }, [inputText]);
 
   return (
     <div className="main">
@@ -30,7 +65,9 @@ function App() {
         />
       </div>
       <p>Category: {selectedValue}</p>
-      <p>Search Text: {inputText}</p>
+
+      {inputText != null ? <NameCard data={inputText} /> : null}
+
     </div>
   );
 }

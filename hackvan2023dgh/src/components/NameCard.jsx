@@ -34,7 +34,7 @@ function NameCard({ data }) {
         <h3> {data.address}</h3>
       </div>
       <div style={item}>
-        <h3 style={{ fontWeight: "normal" }}>recent served:</h3>
+        <h3 style={{ fontWeight: "normal" }}>last served:</h3>
         <h3> {data.servedDate}</h3>
       </div>
       <div style={item}>
