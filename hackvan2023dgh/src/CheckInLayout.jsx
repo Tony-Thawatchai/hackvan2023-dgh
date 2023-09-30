@@ -6,6 +6,7 @@ import ButtonBar from './components/ButtonBar';
 import TextField from "@mui/material/TextField";
 import NameCard from './components/NameCard';
 
+
 function CheckInLayout() {
   const buttonItems = ["name","address","phone"];
   const [selectedValue, setSelectedValue] = useState('');

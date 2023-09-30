@@ -91,7 +91,8 @@ router.delete("/delete/:id", getID, async (req, res) => {
 async function getID(req, res, next) {
   let clientID;
   try {
-    clientID = await clientSchema.findById(req.params.id);
+    
+    clientID = await clientSchema.findById(req.params);
     if (clientID == null) {
       return res.status(404).json({ message: "Cannot find client" });
     }
