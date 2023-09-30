@@ -6,6 +6,11 @@ import TextField from "@mui/material/TextField";
 import NameCard from "./components/NameCard";
 import CheckInLayout from "./CheckInLayout";
 import FormLayout from "./FormLayout";
+import {
+  createBrowserRouter,
+  RouterProvider,
+} from "react-router-dom";
+import Router from "./components/router/Router";
 
 function App() {
   const buttonItems = ["Check in", "New Client","Update data"];
@@ -15,15 +20,18 @@ function App() {
   };
 
   return (
-    <div className="main">
-      {buttonItems.map((item) => (
-        <button key={item} className="button" onClick={() => handleButtonClick(item)}>
-          {item}
-        </button>
-      ))}
-      {selectedValue === "Check in" && <CheckInLayout />}
-      {selectedValue === "New Client" && <FormLayout />}
-    </div>
+    <RouterProvider  router={Router}>
+
+    </RouterProvider>
+    // <div className="main">
+    //   {buttonItems.map((item) => (
+    //     <button key={item} className="button" onClick={() => handleButtonClick(item)}>
+    //       {item}
+    //     </button>
+    //   ))}
+    //   {selectedValue === "Check in" && <CheckInLayout />}
+    //   {selectedValue === "New Client" && <FormLayout />}
+    // </div>
   );
 }
 
