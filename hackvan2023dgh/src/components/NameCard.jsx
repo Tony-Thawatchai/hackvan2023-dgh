@@ -21,24 +21,51 @@ const item = {
 };
 
 function NameCard({ data }) {
-  const [updateData, setUpdateData] = useState(data);
   const [isChanged, setIsChanged] = useState(false);
+  const [updateData, setUpdateData] = useState(data);
+
+  useEffect(() => {
+    // You can add additional logic here if needed
+    setUpdateData(updateData);
+  }, [updateData]);
+
   const getUpdateData = (data) => {
-    setUpdateData(data);
-    // TODO: Remove hack
-    setIsChanged(true);
+    const fetchItems = async () => {
+      const patchData = {
+        ...data,
+        servedDate: new Date().toLocaleDateString(),
+      };
+      
+      try {
+        console.log("🚀 ~ file: NameCard.jsx:35 ~ patchData:", patchData);
+        const response = await fetch(
+          `${process.env.REACT_APP_API_PORT}/client/update/${patchData._id}`,
+          {
+            method: "PATCH",
+            headers: {
+              "Content-Type": "application/json",
+            },
+            body: JSON.stringify(patchData),
+          }
+        );
+
+        if (!response.ok) {
+          throw new Error(`HTTP error! Status: ${response.status}`);
+        }
+
+        // Assuming the response contains the updated data, you can get it if needed
+        const updatedData = await response.json();
+        setUpdateData(updatedData);
+      } catch (error) {
+        console.error("Error fetching data:", error);
+      }
+    };
+    fetchItems();
   };
-  // useEffect(() => {
-  //   // You can add additional logic here if needed
-  // }, [updateData]);
- 
 
-
-
-  const newDate = new Date().toLocaleDateString().toString();
+  // const newDate = new Date().toLocaleDateString().toString();
 
   console.log(updateData);
-
 
   return (
     <div style={container}>
@@ -52,15 +79,17 @@ function NameCard({ data }) {
       </div>
       <div style={item}>
         <h3 style={{ fontWeight: "normal" }}>last served:</h3>
-        {/* <h3> {updateData.servedDate}</h3> */}
-        <h3> {isChanged ? "2023-09-30"  : updateData.servedDate}</h3>
+        <h3> {updateData.servedDate}</h3>
+        {/* <h3> {isChanged ? "2023-09-30"  : updateData.servedDate}</h3> */}
       </div>
       <div style={item}>
         <h3 style={{ fontWeight: "normal" }}>Family mount:</h3>
         <h3> {updateData.FamilyMount}</h3>
       </div>
-      <CheckinBTN data={data} onClick={getUpdateData}
-      // onUpdate={refreshCard}
+      <CheckinBTN
+        data={data}
+        onClick={getUpdateData}
+        // onUpdate={refreshCard}
       />
       {/* <button style={item}>
         Check in
