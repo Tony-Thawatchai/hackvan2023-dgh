@@ -106,7 +106,7 @@ async function getByAddress(req, res, next) {
   const address = req.params.address;
 
   try {
-    const client = await clientSchema.findOne({ address });
+    const client = await clientSchema.findOne({ address : {$regex : address , '$options': 'i'} });
 
     if (!client) {
       return res.status(404).json({ message: "Client not found" });
