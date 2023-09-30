@@ -5,9 +5,10 @@ POST http://localhost:3000/client/post
 Content-Type: application/json
 
 {
-    "name": "Client 777777",
-    "email": "a@a.col",
-    "address": "123 Main St"
+    "name": "Client 999",
+    "servedDate":"2023-09-01",
+    "FamilyMount":2,
+    "address": "23 Beach Ave"
 } 
 ###
 
@@ -24,6 +25,7 @@ Content-Type: application/json
 
 {
     "name": "Client 8888",
-    "email": "a@a.col",
+    "servedDate":"2023-09-01",
+    "FamilyMount":3,
     "address": "123 Main St"
 } 

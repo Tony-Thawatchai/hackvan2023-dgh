@@ -7,6 +7,15 @@ const router = express.Router();
 router.get("/get", async (req, res) => {
   try {
     const clients = await clientSchema.find();
+
+    // data => {
+    //               console.log(data);
+    //               res.set({
+    //                   "Content-Type": "application/json",
+    //                   "Access-Control-Allow-Origin": "*",
+    //                   "Access-Control-Allow-Credentials": true}
+    //               ).send(data.results);
+
     res.json(clients);
     // res.send("Hello World from client.js");
   } catch (error) {
@@ -16,19 +25,23 @@ router.get("/get", async (req, res) => {
 });
 
 // query client by id
-router.get("/getone/:id", getID,  (req, res) => {
-  
-    res.json(res.clientID);
-
+router.get("/getone/:id", getID, (req, res) => {
+  res.json(res.clientID);
 
   // res.send(res.clientID)
 });
+
+router.get("/getone/address/:address", getByAddress, (req, res) => {
+  res.json(res.clientByAddress);
+});
+
 
 // create new client
 router.post("/post", async (req, res) => {
   const client = new clientSchema({
     name: req.body.name,
-    email: req.body.email,
+    servedDate: req.body.servedDate,
+    FamilyMount: req.body.FamilyMount,
     address: req.body.address,
   });
 
@@ -62,7 +75,7 @@ router.patch("/update/:id", getID, async (req, res) => {
 router.delete("/delete/:id", getID, async (req, res) => {
   try {
     const deletedClient = await clientSchema.findByIdAndRemove(req.params.id);
-    
+
     if (!deletedClient) {
       return res.status(404).json({ message: "Client not found" });
     }
@@ -77,16 +90,35 @@ router.delete("/delete/:id", getID, async (req, res) => {
 async function getID(req, res, next) {
   let clientID;
   try {
-     clientID = await clientSchema.findById(req.params.id);
+    clientID = await clientSchema.findById(req.params.id);
     if (clientID == null) {
       return res.status(404).json({ message: "Cannot find client" });
     }
-    res.clientID = clientID; 
+    res.clientID = clientID;
   } catch (error) {
     console.log(error);
     res.status(500).json({ message: error.message });
   }
   next();
-  
 }
+
+async function getByAddress(req, res, next) {
+  const address = req.params.address;
+
+  try {
+    const client = await clientSchema.findOne({ address });
+
+    if (!client) {
+      return res.status(404).json({ message: "Client not found" });
+    }
+
+    res.clientByAddress = client;
+  } catch (error) {
+    console.log(error);
+    return res.status(500).json({ message: error.message });
+  }
+
+  next();
+}
+
 export default router;
