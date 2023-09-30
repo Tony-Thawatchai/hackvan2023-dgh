@@ -42,7 +42,7 @@ router.post("/post", async (req, res) => {
 });
 
 // update client by id
-router.patch("/patch/:id", getID, async (req, res) => {
+router.patch("/update/:id", getID, async (req, res) => {
   if (req.body.name != null) {
     res.clientID.name = req.body.name;
   }
@@ -54,14 +54,19 @@ router.patch("/patch/:id", getID, async (req, res) => {
     res.json(updateClient);
   } catch (error) {
     console.log(error);
-    res.status(400).json({ message: error.message });
+    res.status(500).json({ message: error.message });
   }
 });
 
 // delete client by id
 router.delete("/delete/:id", getID, async (req, res) => {
   try {
-    await res.clientID.remove();
+    const deletedClient = await clientSchema.findByIdAndRemove(req.params.id);
+    
+    if (!deletedClient) {
+      return res.status(404).json({ message: "Client not found" });
+    }
+
     res.json({ message: "Deleted client" });
   } catch (error) {
     console.log(error);
