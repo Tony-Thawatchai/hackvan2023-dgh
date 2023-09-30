@@ -1,27 +1,25 @@
-
-import './App.css';
+import "./App.css";
 import { useState, useEffect } from "react";
 
-import ButtonBar from './components/ButtonBar';
+import ButtonBar from "./components/ButtonBar";
 import TextField from "@mui/material/TextField";
-import NameCard from './components/NameCard';
-
+import NameCard from "./components/NameCard";
 
 function CheckInLayout() {
-  const buttonItems = ["name","address","phone"];
-  const [selectedValue, setSelectedValue] = useState('');
+  const buttonItems = ["name", "address", "phone"];
+  const [selectedValue, setSelectedValue] = useState("");
   const handleButtonClick = (value) => {
     setSelectedValue(value);
-  }
+  };
 
   const [searchTerm, setSearchTerm] = useState(null);
 
-  const [searchResults, setSearchResults] = useState(null);
+  const [searchResults, setSearchResults] = useState([]);
 
-  const [inputText, setInputText] = useState('');
+  const [inputText, setInputText] = useState("");
   const handleInput = (value) => {
     setInputText(value);
-  }
+  };
 
   //  const getResult = (value) => {
   //   console.log(value);
@@ -33,13 +31,15 @@ function CheckInLayout() {
     // fetch from API
     const fetchItems = async () => {
       try {
-        console.log(`${process.env.REACT_APP_API_PORT}/client/getone/address/${inputText}`);
-        // const response = await fetch(
-        //   `http://localhost:3000/client/getone/address/${inputText}`
+        // console.log(
+        //   `${process.env.REACT_APP_API_PORT}/client/getone/address/${inputText}`
         // );
         const response = await fetch(
-          `${process.env.REACT_APP_API_PORT}/client/getone/address/${inputText}`
+          `http://localhost:3000/client/getone/address/${inputText}`
         );
+        // const response = await fetch(
+        //   `${process.env.REACT_APP_API_PORT}/client/getone/address/${inputText}`
+        // );
 
         if (!response.ok) {
           throw new Error(`HTTP error! Status: ${response.status}`);
@@ -65,7 +65,9 @@ function CheckInLayout() {
       <div className="search">
         <TextField
           id="outlined-basic"
-          onChange={(event: React.ChangeEvent<HTMLInputElement>) => handleInput(event.target.value)}
+          onChange={(event: React.ChangeEvent<HTMLInputElement>) =>
+            handleInput(event.target.value)
+          }
           variant="outlined"
           fullWidth
           label="Search"
@@ -73,8 +75,14 @@ function CheckInLayout() {
       </div>
       <p>Category: {selectedValue}</p>
 
-      {searchResults != null ? <NameCard data={searchResults} /> : null}
-
+      {searchResults != null
+        ? searchResults.map((result, index) => (
+          
+            <NameCard 
+            key={index}
+             data={result} />
+          ))
+        : null}
     </div>
   );
 }

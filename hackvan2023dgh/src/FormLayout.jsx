@@ -18,9 +18,9 @@ function FormLayout(props) {
 
   return (
     <div className="form-layout">
-      // {props.children}
+      
       <FormComponent onSubmit={handleFormSubmit} />
-      <p>{formData}</p>
+      
     </div>
   );
 }
