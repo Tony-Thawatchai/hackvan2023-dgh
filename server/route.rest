@@ -5,15 +5,25 @@ POST http://localhost:3000/client/post
 Content-Type: application/json
 
 {
-    "name": "Client 9999",
+    "name": "Client 777777",
     "email": "a@a.col",
     "address": "123 Main St"
 } 
 ###
 
-GET  http://localhost:3000/client/getone/6517dd8afff6766a2ae89c0a
+GET  http://localhost:3000/client/getone/6517d3ec3e350b5fb803e6c1
 
 ###
 
+DELETE http://localhost:3000/client/delete/6517e309a6483b43a5c9eb58
 
- 
+###
+
+PATCH  http://localhost:3000/client/update/6517d3ec3e350b5fb803e6c1
+Content-Type: application/json
+
+{
+    "name": "Client 8888",
+    "email": "a@a.col",
+    "address": "123 Main St"
+} 
