@@ -65,6 +65,7 @@ router.patch("/update/:id", getID, async (req, res) => {
   try {
     const updateClient = await res.clientID.save();
     res.json(updateClient);
+    // res.send(updateClient);
   } catch (error) {
     console.log(error);
     res.status(500).json({ message: error.message });
