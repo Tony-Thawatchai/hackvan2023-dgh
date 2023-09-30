@@ -1,11 +1,19 @@
- GET http://localhost:3000/client
+ GET http://localhost:3000/client/get
  
 ###
-# POST http://localhost:3000/client
-# Content-Type: application/json
+POST http://localhost:3000/client/post
+Content-Type: application/json
 
-# {
-#     "name": "Client 2",
-#     "email": ""
-#     } 
+{
+    "name": "Client 9999",
+    "email": "a@a.col",
+    "address": "123 Main St"
+} 
+###
+
+GET  http://localhost:3000/client/getone/6517dd8afff6766a2ae89c0a
+
+###
+
+
  
