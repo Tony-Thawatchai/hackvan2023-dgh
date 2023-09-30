@@ -12,6 +12,8 @@ function App() {
   const handleButtonClick = (value) => {
     setSelectedValue(value);
   }
+
+  const [searchTerm, setSearchTerm] = useState(null);
   
   const [searchResults, setSearchResults] = useState(null);
 
@@ -20,10 +22,10 @@ function App() {
     setInputText(value);
   }
   
-   const getResult = (value) => {
-    console.log(value);
-    setSearchTerm(value);
-  };
+  //  const getResult = (value) => {
+  //   console.log(value);
+  //   setSearchTerm(value);
+  // };
   console.log(searchResults);
   useEffect(() => {
     setSearchResults(null);
@@ -66,7 +68,7 @@ function App() {
       </div>
       <p>Category: {selectedValue}</p>
 
-      {inputText != null ? <NameCard data={inputText} /> : null}
+      {searchResults != null ? <NameCard data={searchResults} /> : null}
 
     </div>
   );
