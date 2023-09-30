@@ -4,6 +4,7 @@ import mongoose from "mongoose";
 import clientRoute from "./routes/client.js";
 import cors from "cors";
 
+
 dotenv.config();
 
 const app = express();
@@ -31,5 +32,5 @@ app.use(cors(corsOptions));
 app.use("/client", clientRoute);
 
 app.listen(port, () => {
-  console.log(`Example app listening at http://localhost:${port}`);
+  console.log(`Example app listening at ${process.env.HOSTNAME}${port}`);
 });

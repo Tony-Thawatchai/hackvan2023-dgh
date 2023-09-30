@@ -1,5 +1,5 @@
 import React from "react";
-
+import CheckinBTN from "./CheckinBTN";
 
 const container = {
   width: "80%",
@@ -8,21 +8,22 @@ const container = {
   borderRadius: "10px",
   display: "flex",
   justifyContent: "space-around",
-    alignItems: "center",
-    flexWrap: "wrap",
-    gap : "1rem",
-
+  alignItems: "center",
+  flexWrap: "wrap",
+  gap: "1rem",
 };
 
 const item = {
-    flex: 1,
-    flexBasis: "25%",
-    // backgroundColor: "hotpink",
-    
-
-}
+  flex: 1,
+  flexBasis: "25%",
+  // backgroundColor: "hotpink",
+};
 
 function NameCard({ data }) {
+  const updateData = (data) => {
+    console.log("update data" + data);
+  };
+
   return (
     <div style={container}>
       <div style={item}>
@@ -41,9 +42,10 @@ function NameCard({ data }) {
         <h3 style={{ fontWeight: "normal" }}>Family mount:</h3>
         <h3> {data.FamilyMount}</h3>
       </div>
-      <button style={item}>
+      <CheckinBTN data={data} onClick={updateData} />
+      {/* <button style={item}>
         Check in
-      </button>
+      </button> */}
     </div>
   );
 }
