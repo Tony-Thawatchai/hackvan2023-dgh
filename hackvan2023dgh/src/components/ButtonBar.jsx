@@ -4,9 +4,11 @@ import './ButtonBar.css'; // Create a CSS file for styling
 function ButtonBar({ values }) {
   const [currentIndex, setCurrentIndex] = useState(0);
 
-  const handleButtonClick = (index) => {
-    setCurrentIndex(index);
+  const handleButtonClick = (value) => {
+    setCurrentIndex(value);
+    
   };
+  console.log(currentIndex);
 
   return (
     <div className="slider-bar">
@@ -14,7 +16,8 @@ function ButtonBar({ values }) {
         <button
           key={index}
           className={`slider-button ${index === currentIndex ? 'active' : ''}`}
-          onClick={() => handleButtonClick(index)}
+          value={value}
+          onClick={() => handleButtonClick(value)}
         >
           {value}
         </button>
