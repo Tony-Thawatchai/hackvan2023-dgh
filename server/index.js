@@ -15,6 +15,7 @@ const port = 3000;
 const corsOptions = {
     // TODO: CORS policy should be more restrictive in production
     origin: '*'
+    
   };
 // hola amiko
 mongoose.connect(process.env.DB_URL, { useNewUrlParser: true , useUnifiedTopology: true});

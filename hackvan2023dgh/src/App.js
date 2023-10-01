@@ -1,80 +1,40 @@
-
-import './App.css';
+import "./App.css";
 import { useState, useEffect } from "react";
 
-import ButtonBar from './components/ButtonBar';
+import ButtonBar from "./components/ButtonBar";
 import TextField from "@mui/material/TextField";
-import NameCard from './components/NameCard';
+import NameCard from "./components/NameCard";
+import CheckInLayout from "./CheckInLayout";
+import FormLayout from "./FormLayout";
+import UpdateForm from "./components/UpdateForm";
+import {
+  createBrowserRouter,
+  RouterProvider,
+} from "react-router-dom";
+import Router from "./components/router/Router";
+import FormComponent from "./components/FormComponent";
 
 function App() {
-  const buttonItems = ["name","address","phone"];
-  const [selectedValue, setSelectedValue] = useState('');
+  const buttonItems = ["Check in", "New Client","Update data"];
+  const [selectedValue, setSelectedValue] = useState("");
   const handleButtonClick = (value) => {
     setSelectedValue(value);
-  }
-
-  const [searchTerm, setSearchTerm] = useState(null);
-
-  const [searchResults, setSearchResults] = useState(null);
-
-  const [inputText, setInputText] = useState('');
-  const handleInput = (value) => {
-    setInputText(value);
-  }
-
-  //  const getResult = (value) => {
-  //   console.log(value);
-  //   setSearchTerm(value);
-  // };
-  console.log(searchResults);
-  useEffect(() => {
-    setSearchResults(null);
-    // fetch from API
-    const fetchItems = async () => {
-      try {
-        console.log(`${process.env.REACT_APP_API_PORT}/client/getone/address/${inputText}`);
-        // const response = await fetch(
-        //   `http://localhost:3000/client/getone/address/${inputText}`
-        // );
-        const response = await fetch(
-          `${process.env.REACT_APP_API_PORT}/client/getone/address/${inputText}`
-        );
-
-        if (!response.ok) {
-          throw new Error(`HTTP error! Status: ${response.status}`);
-        }
-
-        const data = await response.json();
-        setSearchResults(data);
-      } catch (error) {
-        console.error("Error fetching data:", error);
-      }
-    };
-
-    // Only fetch when searchTerm changes
-    if (inputText !== "") {
-      fetchItems();
-    }
-  }, [inputText]);
+  };
 
   return (
-    <div className="main">
-      <h1>Client List</h1>
-      <ButtonBar values={buttonItems} onSelect={handleButtonClick} />
-      <div className="search">
-        <TextField
-          id="outlined-basic"
-          onChange={(event: React.ChangeEvent<HTMLInputElement>) => handleInput(event.target.value)}
-          variant="outlined"
-          fullWidth
-          label="Search"
-        />
-      </div>
-      <p>Category: {selectedValue}</p>
+    <RouterProvider  router={Router}>
 
-      {searchResults != null ? <NameCard data={searchResults} /> : null}
-
-    </div>
+    </RouterProvider>
+    
+    // <div className="main">
+    //   {buttonItems.map((item) => (
+    //     <button key={item} className="button" onClick={() => handleButtonClick(item)}>
+    //       {item}
+    //     </button>
+    //   ))}
+    //   {selectedValue === "Check in" && <CheckInLayout />}
+    //   {selectedValue === "New Client" && <FormLayout />}
+    // </div>
   );
 }
 
