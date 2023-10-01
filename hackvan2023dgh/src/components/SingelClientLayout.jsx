@@ -11,7 +11,7 @@ function SingelClientLayout({data}) {
   const navigate = useNavigate();
   return (
     <div>
-      <div className=" topBar"></div>
+      {/* <div className=" topBar"></div> */}
       <div className=" w-full text-center h-[30%] flex flex-col items-center justify-around  px-[4%] ">
         <button
           onClick={() => navigate("/volunteerhome")}
