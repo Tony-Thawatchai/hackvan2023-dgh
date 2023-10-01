@@ -70,8 +70,8 @@ function ReportLayout() {
           headers: {
             "Content-Type": "application/json",
           },
-          body: JSON.stringify(jsonData),
           // body: JSON.stringify(jsonData),
+          body: jsonData,
           redirect: 'follow'
         };
         
