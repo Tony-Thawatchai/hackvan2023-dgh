@@ -8,13 +8,19 @@ import CheckInLayout from "./CheckInLayout";
 import FormLayout from "./FormLayout";
 import { useNavigate } from "react-router-dom";
 
-function CheckIn() {
+function Home() {
   const navigate = useNavigate();
   const buttonItems = ["Check in", "New Client", "Update data"];
   const [selectedValue, setSelectedValue] = useState("");
+  useEffect(() => {
+    if (selectedValue) {
+      navigate(`/${selectedValue}`);
+    }
+  }, [selectedValue]);
+ 
   const handleButtonClick = (value) => {
     setSelectedValue(value);
-    navigate(`/${selectedValue}`);
+    // navigate(`/${selectedValue}`);
   };
 
   return (
@@ -46,4 +52,4 @@ function CheckIn() {
   );
 }
 
-export default CheckIn;
+export default Home;
