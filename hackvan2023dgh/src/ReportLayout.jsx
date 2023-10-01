@@ -72,7 +72,7 @@ function ReportLayout() {
           },
           // body: JSON.stringify(jsonData),
           body: jsonData,
-          redirect: 'follow'
+          // redirect: 'follow'
         };
         
         fetch("https://script.google.com/macros/s/AKfycbw92BMeLOmp72aA_8YIq9s_cWtYkDQTQzxkQveRyPnOaNFw98AJ7LaJjwAuL6MjNOnO/exec", requestOptions)
