@@ -1,5 +1,7 @@
 import express from "express";
 import clientSchema from "../model/client.js";
+import mongoose from "mongoose";
+import bodyParser from "body-parser";
 
 const router = express.Router();
 
@@ -7,14 +9,6 @@ const router = express.Router();
 router.get("/get", async (req, res) => {
   try {
     const clients = await clientSchema.find();
-
-    // data => {
-    //               console.log(data);
-    //               res.set({
-    //                   "Content-Type": "application/json",
-    //                   "Access-Control-Allow-Origin": "*",
-    //                   "Access-Control-Allow-Credentials": true}
-    //               ).send(data.results);
 
     res.json(clients);
     // res.send("Hello World from client.js");
@@ -31,10 +25,10 @@ router.get("/getone/:id", getID, (req, res) => {
   // res.send(res.clientID)
 });
 
+// get by address
 router.get("/getone/address/:address", getByAddress, (req, res) => {
   res.json(res.clientByAddress);
 });
-
 
 // create new client
 router.post("/post", async (req, res) => {
@@ -56,6 +50,14 @@ router.post("/post", async (req, res) => {
 
 // update client by id
 router.patch("/update/:id", getID, async (req, res) => {
+console.log(req.body);
+  if (req.body == null && req.bodh == undefined){
+    return res.status(400).json({message: "Cannot update client"});
+  }
+
+  if (req.body.servedDate != null) {
+    res.clientID.servedDate = new Date().toLocaleDateString();
+  }
   if (req.body.name != null) {
     res.clientID.name = req.body.name;
   }
@@ -90,9 +92,12 @@ router.delete("/delete/:id", getID, async (req, res) => {
 
 async function getID(req, res, next) {
   let clientID;
+  console.log(req.params.id);
+  if (mongoose.Types.ObjectId.isValid(req.params.id)) {
+    console.log("valid");
+  }
   try {
-    
-    clientID = await clientSchema.findById(req.params);
+    clientID = await clientSchema.findById(req.params.id);
     if (clientID == null) {
       return res.status(404).json({ message: "Cannot find client" });
     }
@@ -108,7 +113,9 @@ async function getByAddress(req, res, next) {
   const address = req.params.address;
 
   try {
-    const client = await clientSchema.findOne({ address : {$regex : address , '$options': 'i'} });
+    const client = await clientSchema.find({
+      address: { $regex: address, $options: "i" },
+    });
 
     if (!client) {
       return res.status(404).json({ message: "Client not found" });

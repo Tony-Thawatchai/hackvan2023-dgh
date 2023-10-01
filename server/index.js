@@ -3,6 +3,7 @@ import express from "express";
 import mongoose from "mongoose";
 import clientRoute from "./routes/client.js";
 import cors from "cors";
+import bodyParser from "body-parser";
 
 
 dotenv.config();
@@ -13,10 +14,11 @@ const port = 3000;
 
 // Allow requests from http://localhost:3001
 const corsOptions = {
-    origin: '*'
+    origin: '*',
+    
     
   };
-// hola amiko
+
 mongoose.connect(process.env.DB_URL, { useNewUrlParser: true , useUnifiedTopology: true});
 const db = mongoose.connection;
 
@@ -26,6 +28,9 @@ db.once("open", function () {
   console.log("connected to db");
 });
 
+//bodyparser setup
+app.use(bodyParser.urlencoded({ extended: true }));
+app.use(bodyParser.json());
 app.use(cors(corsOptions));
 // app.use(express.json());
 
