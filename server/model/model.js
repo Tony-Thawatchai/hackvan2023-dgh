@@ -7,6 +7,7 @@ const clientSchema = new mongoose.Schema({
     yearOfBirth: Number { type: Number, min: 1900 },
     isDependent: Boolean,
     dietaryRestrictions: [{ type: String }],
+    phone: String,
     idType: String,
     idNumber: String,
 });
@@ -14,10 +15,17 @@ const clientSchema = new mongoose.Schema({
 const householdSchema = new mongoose.Schema({
     _id: mongoose.Schema.Types.ObjectId,
     address: String,
+    postalCode: String,
+    community: String,
+    weekGroup: String,
     numMouths: { type: Number, min: 1, default: 1 },
     completed: { type: Boolean, default: true },
-    datesServed: [{ type: Date }],
     notes:  [{ type: String }],
+});
+
+const datesServedSchema = new mongoose.Schema({
+    householdId: mongoose.Schema.Types.ObjectId,
+    date: Date,
 });
 
 const userSchema = new mongoose.Schema({
