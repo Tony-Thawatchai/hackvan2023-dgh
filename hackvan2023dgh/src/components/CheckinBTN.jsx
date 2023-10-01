@@ -65,7 +65,7 @@ function CheckinBTN({ data, onClick }) {
         alignSelf: "center",
         color: "black",
       }}
-      // className="button active"
+      className="button active"
       // sx={{
       //   boxShadow: "none",
       //   ":hover": {

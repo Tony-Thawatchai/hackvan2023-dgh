@@ -76,7 +76,7 @@ function NameCard({ data }) {
   console.log(updateData);
 
   return (
-    <button 
+    <div 
     // value={updateData._id}
     // onClick={getUpdateData(value)} 
      style={{backgroundColor: "#F0F0F0", display:"flex", minWidth:"80%", justifyContent:"space-around"}}>
@@ -171,7 +171,7 @@ function NameCard({ data }) {
         data={data}
         onClick={getUpdateData}
       />
-    </button>
+    </div>
   );
 }
 

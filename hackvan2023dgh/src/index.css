@@ -53,11 +53,11 @@ code {
   display: flex;
   width: 6rem;
 
-  padding: 0.5rem;
+  padding: 2rem 0;
   flex-direction: row;
-  justify-content: center;
+  justify-content: start;
   align-items: center;
-  margin-top: 2rem;
+  /* margin-top: 2rem; */
   /* justify-self: start; */
 
   /* 
