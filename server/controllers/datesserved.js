@@ -28,6 +28,16 @@ class DatesServed {
         res.status(500).send({ message: err.message })
       })
   }
+
+  findLatest = (req, res) => {
+    datesServedSchema.find({ householdId: req.params.householdId }).sort({ date: -1 }).limit(1)
+      .then(datesServed => {
+        res.send(datesServed)
+      })
+      .catch(err => {
+        res.status(500).send({ message: err.message })
+      })
+  }
 }
 
 export default DatesServed;
