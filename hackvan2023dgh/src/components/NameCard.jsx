@@ -76,8 +76,10 @@ function NameCard({ data }) {
   console.log(updateData);
 
   return (
-    <div style={{backgroundColor: "#F0F0F0", display:"flex", minWidth:"80%", justifyContent:"space-around"}}>
-      <div style={container}>
+    <button 
+    // onClick={getUpdateData}
+     style={{backgroundColor: "#F0F0F0", display:"flex", minWidth:"80%", justifyContent:"space-around"}}>
+      <div style={container} >
         <div style={item}>
           <h3
             style={{
@@ -168,7 +170,7 @@ function NameCard({ data }) {
         data={data}
         onClick={getUpdateData}
       />
-    </div>
+    </button>
   );
 }
 

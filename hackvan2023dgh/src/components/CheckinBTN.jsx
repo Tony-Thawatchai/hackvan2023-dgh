@@ -36,7 +36,7 @@ function CheckinBTN({ data, onClick }) {
 
   return (
     <>
-      <Button 
+      {/* <Button 
       // variant="contained" 
       onClick={handleClick} 
     
@@ -52,13 +52,13 @@ function CheckinBTN({ data, onClick }) {
         
       }}
       >
-        {/* <ArrowForwardIosIcon /> */}
+        
         Check in
-      </Button>
+      </Button> */}
      
      
      
-      {/* <Button 
+      <Button 
       // variant="contained" 
       onClick={handleClick} 
       sx={{
@@ -77,7 +77,7 @@ function CheckinBTN({ data, onClick }) {
       >
         <ArrowForwardIosIcon />
         
-      </Button> */}
+      </Button>
     </>
   );
 }
