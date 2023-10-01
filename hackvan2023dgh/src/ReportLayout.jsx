@@ -72,7 +72,7 @@ function ReportLayout() {
         };
         
         fetch("https://script.google.com/macros/s/AKfycbw92BMeLOmp72aA_8YIq9s_cWtYkDQTQzxkQveRyPnOaNFw98AJ7LaJjwAuL6MjNOnO/exec", requestOptions)
-          .then(response => response.text())
+          .then(response => JSON.stringify(response.text()))
           .then(result => console.log(result))
           .catch(error => console.log('error', error));
       

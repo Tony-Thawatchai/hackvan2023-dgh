@@ -69,7 +69,7 @@ function CheckInLayout() {
         </div>
       </div>
       <div className="main">
-        <p className="pageDescription ">SEARCHING BY:</p>
+        <p className="pageDescription uppercase ">SEARCHING BY:</p>
         <ButtonBar values={buttonItems} onSelect={handleButtonClick} />
         <div className="search">
           <TextField
