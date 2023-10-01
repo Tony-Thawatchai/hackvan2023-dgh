@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState } from "react";
 import {
   TextField,
   MenuItem,
@@ -9,92 +9,186 @@ import {
   Select,
   FormControl,
   InputLabel,
-} from '@mui/material';
+  
+
+} from "@mui/material";
+import { Unstable_NumberInput as NumberInput } from '@mui/base/Unstable_NumberInput';
+
 
 const initialFamilyMember = {
-  idType: '',
-  idNumber: '',
-  birthYear: '',
-  sex: '',
+  idType: "",
+  idNumber: "",
+  birthYear: "",
+  sex: "",
 };
 
 const FormComponent = ({ onSubmit }) => {
   const [primaryContact, setPrimaryContact] = useState({
-    name: '',
-    phoneNumber: '',
-    address: '',
-    community: '',
+    //  ! receive data from the Props
+    // householdId: mongoose.Schema.Types.ObjectId,
+    name: "",
+    sex: "",
+    yearOfBirth: "",
+    isDependent: false,
+    dietaryRestrictions: [""],
+    phone: "",
+    idType: "",
+    idNumber: "",
   });
-  const [familyMembers, setFamilyMembers] = useState([{ idType: '', idNumber: '', birthYear: '', sex: ''}]);
+  const [familyAmount, setFamilyAmount] = useState(0);
+  const [householdData, setHouseholdData] = useState({
+    address: "",
+    postalCode: "",
+    community: "",
+    weekGroup: "",
+    numMouths: "",
+    completed: false,
+    notes: [],
+  });
+  const [familyMembers, setFamilyMembers] = useState([
+    { idType: "", idNumber: "", birthYear: "", sex: "" },
+  ]);
   const handleSubmit = (e) => {
     e.preventDefault();
 
     // Construct the form data object
     const formData = {
       primaryContact,
-      familyMembers,
+      householdData,
     };
 
     onSubmit(formData);
-  }
+  };
 
   const handlePrimaryContactChange = (field, value) => {
     setPrimaryContact({ ...primaryContact, [field]: value });
   };
-
-  const handleFamilyMemberChange = (index, field, value) => {
-    const updatedFamilyMembers = [...familyMembers];
-    updatedFamilyMembers[index][field] = value;
-    setFamilyMembers(updatedFamilyMembers);
+  const handlePrimaryHouseholdData = (field, value) => {
+    setHouseholdData({ ...householdData, [field]: value });
   };
 
-  const handleAddFamilyMember = () => {
-    setFamilyMembers([...familyMembers, { idType: '', idNumber: '', birthYear: '', sex: ''}]);
-  };
+  // const handleFamilyMemberChange = (index, field, value) => {
+  //   const updatedFamilyMembers = [...familyMembers];
+  //   updatedFamilyMembers[index][field] = value;
+  //   setFamilyMembers(updatedFamilyMembers);
+  // };
+
+  // const handleAddFamilyMember = () => {
+  //   setFamilyMembers([
+  //     ...familyMembers,
+  //     { idType: "", idNumber: "", birthYear: "", sex: "" },
+  //   ]);
+  // };
 
   return (
-    <form onSubmit={handleSubmit}>
-      <Typography variant="h5">Primary Contact Information</Typography>
+    <form
+      style={{ display: "flex", flexDirection: "column", gap: "1.5rem" }}
+      onSubmit={handleSubmit}
+    >
       <TextField
-        label="Primary contact Name"
+        sx={{
+          fontFamily: '"Proxima Nova", "-apple-system", "BlinkMacSystemFont"',
+        }}
+        label="Name"
         value={primaryContact.name}
-        onChange={(e) => handlePrimaryContactChange('name', e.target.value)}
+        onChange={(e) => handlePrimaryContactChange("name", e.target.value)}
         fullWidth
       />
       <TextField
-        label="Primary contact Phone Number"
+        sx={{
+          fontFamily: '"Proxima Nova", "-apple-system", "BlinkMacSystemFont"',
+        }}
+        label="Address"
         value={primaryContact.phoneNumber}
-        onChange={(e) => handlePrimaryContactChange('phoneNumber', e.target.value)}
+        onChange={(e) => handlePrimaryHouseholdData("address", e.target.value)}
         fullWidth
         type="tel"
       />
+
+      <FormControl fullWidth>
+        <InputLabel>Status</InputLabel>
+        <Select
+          value={primaryContact.community}
+          onChange={(e) =>
+            handlePrimaryHouseholdData("completed", e.target.value)
+          }
+        >
+          <MenuItem value={false}>Incomplete</MenuItem>
+          <MenuItem value={true}>Complete</MenuItem>
+          {/* <MenuItem value="Other">Other</MenuItem> */}
+        </Select>
+      </FormControl>
+      <FormControl fullWidth>
+        <InputLabel>Gender</InputLabel>
+        <Select
+          value={householdData.sex}
+          onChange={(e) => handlePrimaryContactChange("sex", e.target.value)}
+        >
+          <MenuItem value="Male">Male</MenuItem>
+          <MenuItem value="Female">Female</MenuItem>
+          <MenuItem value="LGBTQ+">LGBTQ+</MenuItem>
+          <MenuItem value="Not to say">Prefer not to say</MenuItem>
+          {/* <MenuItem value="Other">Other</MenuItem> */}
+        </Select>
+      </FormControl>
       <TextField
-        label="Address"
-        value={primaryContact.address}
-        onChange={(e) => handlePrimaryContactChange('address', e.target.value)}
+        sx={{
+          fontFamily: '"Proxima Nova", "-apple-system", "BlinkMacSystemFont"',
+        }}
+        label="Year of Birth"
+        value={primaryContact.yearOfBirth}
+        onChange={(e) =>
+          handlePrimaryContactChange("yearOfBirth", e.target.value)
+        }
         fullWidth
       />
-      <FormControl fullWidth>
+      <TextField
+        sx={{
+          fontFamily: '"Proxima Nova", "-apple-system", "BlinkMacSystemFont"',
+        }}
+        label="Family Mounths"
+        value={householdData.numMouths}
+        onChange={(e) =>
+          handlePrimaryHouseholdData("numMouths", e.target.value)
+        }
+        fullWidth
+      />
+      <TextField
+        sx={{
+          fontFamily: '"Proxima Nova", "-apple-system", "BlinkMacSystemFont"',
+        }}
+        label="Week Group"
+        value={householdData.weekGroup}
+        onChange={(e) =>
+          handlePrimaryHouseholdData("weekGroup", e.target.value)
+        }
+        fullWidth
+      />
+       <FormControl fullWidth>
         <InputLabel>Community</InputLabel>
         <Select
           value={primaryContact.community}
-          onChange={(e) => handlePrimaryContactChange('community', e.target.value)}
+          onChange={(e) =>
+            handlePrimaryHouseholdData("completed", e.target.value)
+          }
         >
-          <MenuItem value="Edmonds">Edmonds</MenuItem>
-          <MenuItem value="Burnaby">Burnaby</MenuItem>
-          <MenuItem value="Other">Other</MenuItem>
+          <MenuItem value={false}>Incomplete</MenuItem>
+          <MenuItem value={true}>Complete</MenuItem>
+          {/* <MenuItem value="Other">Other</MenuItem> */}
         </Select>
       </FormControl>
-
-      <Typography variant="h5">Family Members</Typography>
-      {familyMembers.map((familyMember, index) => (
+    
+      {/* <Typography variant="h5">Family Members</Typography> */}
+      {/* {familyMembers.map((familyMember, index) => (
         <Grid container spacing={2} key={index}>
           <Grid item xs={3}>
             <FormControl fullWidth>
               <InputLabel>ID type</InputLabel>
               <Select
                 value={familyMember.idType}
-                onChange={(e) => handleFamilyMemberChange(index, 'idType', e.target.value)}
+                onChange={(e) =>
+                  handleFamilyMemberChange(index, "idType", e.target.value)
+                }
               >
                 <MenuItem value="BCID">BCID</MenuItem>
                 <MenuItem value="Drivers License">Drivers License</MenuItem>
@@ -104,17 +198,27 @@ const FormComponent = ({ onSubmit }) => {
           </Grid>
           <Grid item xs={3}>
             <TextField
+            sx={{
+          fontFamily: '"Proxima Nova", "-apple-system", "BlinkMacSystemFont"',
+        }}
               label="ID last 4 digits"
               value={familyMember.idNumber}
-              onChange={(e) => handleFamilyMemberChange(index, 'idNumber', e.target.value)}
+              onChange={(e) =>
+                handleFamilyMemberChange(index, "idNumber", e.target.value)
+              }
               fullWidth
             />
           </Grid>
           <Grid item xs={3}>
             <TextField
+            sx={{
+          fontFamily: '"Proxima Nova", "-apple-system", "BlinkMacSystemFont"',
+        }}
               label="Birth Year"
               value={familyMember.birthYear}
-              onChange={(e) => handleFamilyMemberChange(index, 'birthYear', e.target.value)}
+              onChange={(e) =>
+                handleFamilyMemberChange(index, "birthYear", e.target.value)
+              }
               fullWidth
             />
           </Grid>
@@ -123,7 +227,9 @@ const FormComponent = ({ onSubmit }) => {
               <InputLabel>Sex</InputLabel>
               <Select
                 value={familyMember.sex}
-                onChange={(e) => handleFamilyMemberChange(index, 'sex', e.target.value)}
+                onChange={(e) =>
+                  handleFamilyMemberChange(index, "sex", e.target.value)
+                }
               >
                 <MenuItem value="Male">Male</MenuItem>
                 <MenuItem value="Female">Female</MenuItem>
@@ -132,11 +238,11 @@ const FormComponent = ({ onSubmit }) => {
             </FormControl>
           </Grid>
         </Grid>
-      ))}
+      ))} */}
 
-      <IconButton color="primary" onClick={handleAddFamilyMember}>
+      {/* <IconButton color="primary" onClick={handleAddFamilyMember}>
         <Typography variant="body1">+</Typography>
-      </IconButton>
+      </IconButton> */}
 
       <Button variant="contained" color="primary" type="submit">
         Submit
@@ -146,4 +252,3 @@ const FormComponent = ({ onSubmit }) => {
 };
 
 export default FormComponent;
-
