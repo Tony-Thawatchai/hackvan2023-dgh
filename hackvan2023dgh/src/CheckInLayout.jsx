@@ -5,8 +5,10 @@ import ButtonBar from "./components/ButtonBar";
 import TextField from "@mui/material/TextField";
 import NameCard from "./components/NameCard";
 import ArrowBackIosNewIcon from "@mui/icons-material/ArrowBackIosNew";
+import { useNavigate } from "react-router-dom";
 
 function CheckInLayout() {
+  const navigate = useNavigate();
   const buttonItems = ["name", "address", "phone"];
   const [selectedValue, setSelectedValue] = useState("");
   const handleButtonClick = (value) => {
@@ -91,7 +93,7 @@ function CheckInLayout() {
             ))
           : null}
       
-      <button className="  backBTN ">
+      <button onClick={()=>navigate('/volunteerhome')} className="  backBTN ">
           {" "}
           <ArrowBackIosNewIcon /> Back
         </button>

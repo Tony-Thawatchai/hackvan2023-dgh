@@ -67,12 +67,12 @@ function ReportLayout() {
 
         let requestOptions = {
           method: 'POST',
-          body: jsonData,
+          body: JSON.stringify(jsonData),
           redirect: 'follow'
         };
         
         fetch("https://script.google.com/macros/s/AKfycbw92BMeLOmp72aA_8YIq9s_cWtYkDQTQzxkQveRyPnOaNFw98AJ7LaJjwAuL6MjNOnO/exec", requestOptions)
-          .then(response => JSON.stringify(response.text()))
+          .then(response => response.text())
           .then(result => console.log(result))
           .catch(error => console.log('error', error));
       

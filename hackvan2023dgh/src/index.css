@@ -19,7 +19,7 @@ body {
 .main {
   display: flex;
   height: 100vh;
-  max-width: 1028px;
+  /* max-width: 1028px; */
   margin: 0 auto;
   width: 100%;
   align-items: center;

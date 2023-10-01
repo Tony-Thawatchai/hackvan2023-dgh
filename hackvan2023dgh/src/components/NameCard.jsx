@@ -25,6 +25,7 @@ const item = {
   // maxWidth: "400px",
   flexDirection: "row",
   justifyContent: "start",
+  gap: ".5rem",
 };
 
 function NameCard({ data }) {
@@ -86,7 +87,7 @@ function NameCard({ data }) {
               display: "inline",
             }}
           >
-            Name:
+            Name: 
           </h3>
           <h3
             style={{
