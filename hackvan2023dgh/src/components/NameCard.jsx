@@ -77,7 +77,8 @@ function NameCard({ data }) {
 
   return (
     <button 
-    // onClick={getUpdateData}
+    // value={updateData._id}
+    // onClick={getUpdateData(value)} 
      style={{backgroundColor: "#F0F0F0", display:"flex", minWidth:"80%", justifyContent:"space-around"}}>
       <div style={container} >
         <div style={item}>
