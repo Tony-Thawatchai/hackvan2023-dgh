@@ -1,14 +1,15 @@
-const db = require('../models')
-const Client = db.Client
+import clientSchema from '../model/clientSchema.js';
+import asyncHandler from 'express-async-handler';
 
 // create adds a new client to the database
-exports.create = (req, res) => {
-    if (!req.body) {
+export const create = asyncHandler(async (req, res) => {
+    console.log(req.body);
+    if (Object.keys(req.body).length === 0) {
         res.status(400).send({ message: 'Content cannot be empty!' });
         return;
     }
 
-    const client = new Client({
+    const client = new clientSchema({
         householdId: req.body.householdId,
         sex: req.body.sex,
         yearOfBirth: req.body.yearOfBirth,
@@ -18,22 +19,23 @@ exports.create = (req, res) => {
         idNumber: req.body.idNumber,
     });
 
-    if (req.body.isDependent) {
+    if (!req.body.isDependent) {
         client.name = req.body.name;
         client.phone = req.body.phone;
     }
 
-    client.save(client).then(data => {
-        res.send(data);
-    }).catch(err => {
-        res.status(500).send({
-            message: err.message || 'An error occurred while creating the client.'
-        });
-    }
-}
+    client.save(client)
+        .then(data => {
+            res.send(data);
+        }).catch(err => {
+            res.status(500).send({
+                message: err.message || 'An error occurred while creating the client.'
+            });
+        })
+});
 
 // returns all clients in a household
-exports.findAllInHousehold = (req, res) => {
+export const findAllInHousehold = asyncHandler(async (req, res) => {
     const householdId = req.query.householdId;
     var condition = householdId ? { householdId: { $match: householdId } } : {};
 
@@ -43,11 +45,11 @@ exports.findAllInHousehold = (req, res) => {
         res.status(500).send({
             message: err.message || 'An error occurred while retrieving clients.'
         });
-    }
-}
+    })
+});
 
 // returns all client matching a criteria
-exports.findAllCriteriaMatch = (req, res) => {
+export const findAllCriteriaMatch = asyncHandler(async (req, res) => {
     const field = req.query.field;
     const value = req.query.value;
     var condition = field ? { field: { $match: value } } : {};
@@ -57,12 +59,12 @@ exports.findAllCriteriaMatch = (req, res) => {
         res.status(500).send({
             message: err.message || 'An error occurred while retrieving clients.'
         });
-    }
-}
+    })
+});
 
 
 // update a client
-exports.update = (req, res) => {
+export const update = asyncHandler(async (req, res) => {
     if (!req.body) {
         res.status(400).send({
             message: 'Data to update cannot be empty!'
@@ -72,7 +74,7 @@ exports.update = (req, res) => {
 
     const id = req.params.id;
 
-    Client.findByIdAndUpdate(id, req.body, { useFindAndModify: false }).then(data => {
+    clientSchema.findByIdAndUpdate(id, req.body, { useFindAndModify: false }).then(data => {
         if (!data) {
             res.status(404).send({
                 message: `Cannot update client with id=${id}. Client not found!`
@@ -83,4 +85,5 @@ exports.update = (req, res) => {
             message: 'Error updating client with id=' + id
         });
     });
-}
+});
+
