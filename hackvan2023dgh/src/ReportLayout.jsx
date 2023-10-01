@@ -68,11 +68,11 @@ function ReportLayout() {
         let requestOptions = {
           method: 'POST',
           headers: {
-            "Content-Type": "application/json",
+            "Content-Type": "text/plain;charset=utf-8",
           },
-          // body: JSON.stringify(jsonData),
-          body: jsonData,
-          // redirect: 'follow'
+          body: JSON.stringify(jsonData),
+          // body: jsonData,
+          redirect: 'follow'
         };
         
         fetch("https://script.google.com/macros/s/AKfycbw92BMeLOmp72aA_8YIq9s_cWtYkDQTQzxkQveRyPnOaNFw98AJ7LaJjwAuL6MjNOnO/exec", requestOptions)
