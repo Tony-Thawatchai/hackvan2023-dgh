@@ -2,8 +2,11 @@ import React from "react";
 import { Button } from "@mui/material";
 import { useState } from "react";
 import ArrowForwardIosIcon from '@mui/icons-material/ArrowForwardIos';
+import { useNavigate } from "react-router-dom";
+import SingelClientLayout from "./SingelClientLayout";
 
 function CheckinBTN({ data, onClick }) {
+  const navigate = useNavigate();
   // patch request to update the last served date
 //   console.log(data._id);
   const [updateData, setUpdateData] = useState(data);
@@ -11,8 +14,9 @@ function CheckinBTN({ data, onClick }) {
   const update = { ...data, servedDate: dateString };
   const handleClick = () => {
     setUpdateData(update);
-    onClick(updateData);
-    // onUpdate(updateData)
+navigate('/singleClient', <SingelClientLayout /> )
+    // onClick(updateData);
+    
   };
   console.log(updateData);
 
