@@ -7,7 +7,43 @@ import NameCard from "./components/NameCard";
 import ArrowBackIosNewIcon from "@mui/icons-material/ArrowBackIosNew";
 import { useNavigate } from "react-router-dom";
 
-function CheckInLayout() {
+const getHTTPRequest = async (url) => {
+  try {
+    const response = await fetch(url);
+    if (!response.ok) {
+      throw new Error(`HTTP error! Status: ${response.status}`);
+    }
+    const data = await response.json();
+    return data;
+  } catch (error) {
+    console.error("Error fetching data:", error);
+  }
+};
+
+const searchByAddress = async (searchTerm) => {
+  const result = await getHTTPRequest(`${process.env.REACT_APP_API_PORT}/household/search/address/${searchTerm}`);
+  return result;
+  // return new Promise((resolve, reject) => {
+  //   resolve(getHTTPRequest(`${process.env.REACT_APP_API_PORT}/household/search/address/${searchTerm}`));
+  // });
+};
+
+const getClientsByHousehold = async (householdId) => {
+  const result = await getHTTPRequest(`${process.env.REACT_APP_API_PORT}/household/${householdId}/clients`);
+  return result;
+  // return new Promise((resolve, reject) => {
+  //   resolve(getHTTPRequest(`${process.env.REACT_APP_API_PORT}/household/${householdId}/clients`));
+  // });
+};
+
+const getLatestDateServedByHousehold = async (householdId) => {
+  const result = await getHTTPRequest(`${process.env.REACT_APP_API_PORT}/household/${householdId}/datesserved/latest`);
+  return result;
+  // return new Promise((resolve, reject) => {
+  //   resolve(getHTTPRequest(`${process.env.REACT_APP_API_PORT}/household/${householdId}/datesserved/latest`));
+  // });
+};
+const CheckInLayout = () => {
   const navigate = useNavigate();
   const buttonItems = ["name", "address", "phone"];
   const [selectedValue, setSelectedValue] = useState("");
@@ -28,37 +64,43 @@ function CheckInLayout() {
   //   console.log(value);
   //   setSearchTerm(value);
   // };
-  console.log(searchResults);
   useEffect(() => {
-    setSearchResults(null);
     // fetch from API
-    const fetchItems = async () => {
-      try {
-        // console.log(
-        //   `${process.env.REACT_APP_API_PORT}/client/getone/address/${inputText}`
-        // );
-        // const response = await fetch(
-        //   `http://localhost:3000/client/getone/address/${inputText}`
-        // );
-        const response = await fetch(
-          `${process.env.REACT_APP_API_PORT}/household/search/address/${inputText}`
-        );
+    // Only fetch when searchTerm changes
 
-        if (!response.ok) {
-          throw new Error(`HTTP error! Status: ${response.status}`);
-        }
+    const myFunction = async () => {
+      var results = [];
 
-        const data = await response.json();
-        setSearchResults(data);
-      } catch (error) {
-        console.error("Error fetching data:", error);
-      }
+      const households = await searchByAddress(inputText);
+
+      
+      // await an array of promises
+
+      const promises = households.map(async (household) => {
+        const householdId = household._id;
+        const clients = await getClientsByHousehold(householdId);
+        const latestDate = await getLatestDateServedByHousehold(householdId);
+        const clientinfo = clients.map((client) => {
+          const { _id, ...rest } = household;
+          return {
+            ...client,
+            ...rest,
+            servedDate: latestDate.date
+          };
+        })
+        results.push(clientinfo);
+        console.log(results)
+      })
+
+      await Promise.all(promises);
+
+      setSearchResults(results);
     };
 
-    // Only fetch when searchTerm changes
-    if (inputText !== "") {
-      fetchItems();
+    if (inputText.length !== 0) {
+      myFunction();
     }
+
   }, [inputText]);
 
   return (
@@ -88,14 +130,14 @@ function CheckInLayout() {
             variant="outlined"
             fullWidth
             label="Search"
-            // className="w-[50%]"
+          // className="w-[50%]"
           />
         </div>
 
         {searchResults != null
           ? searchResults.map((result, index) => (
-              <NameCard key={index} data={result} />
-            ))
+            <NameCard key={index} data={result} />
+          ))
           : null}
       </div>
     </div>

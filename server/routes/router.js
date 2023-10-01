@@ -23,6 +23,7 @@ router.get("/household/search/address/:address", household.findByAddress);
 
 // DatesServed routes
 router.post("/datesserved/create", datesServed.create);
-router.get("/household/:id/datesserved", datesServed.findAll);
+router.get("/household/:id/datesserved/all", datesServed.findAll);
+router.get("/household/:id/datesserved/latest", datesServed.findLatest);
 
 export default router;

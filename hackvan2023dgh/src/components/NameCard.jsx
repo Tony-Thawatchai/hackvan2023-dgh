@@ -141,7 +141,7 @@ function NameCard({ data }) {
             }}
           >
             {" "}
-            {updateData.servedDate}
+            {updateData.date}
           </h3>
           {/* <h3> {isChanged ? "2023-09-30"  : updateData.servedDate}</h3> */}
         </div>
@@ -163,7 +163,7 @@ function NameCard({ data }) {
             }}
           >
             {" "}
-            {updateData.FamilyMount}
+            {updateData.numMouths}
           </h3>
         </div>
       </div>
