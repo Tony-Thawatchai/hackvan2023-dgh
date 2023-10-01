@@ -1,5 +1,5 @@
 import "./App.css";
-import { useState, useEffect } from "react";
+import React, { useState, useEffect } from "react";
 
 import ButtonBar from "./components/ButtonBar";
 import TextField from "@mui/material/TextField";
@@ -82,7 +82,7 @@ function CheckInLayout() {
         <div className="search">
           <TextField
             id="outlined-basic"
-            onChange={(event: React.ChangeEvent<HTMLInputElement>) =>
+            onChange={(event) =>
               handleInput(event.target.value)
             }
             variant="outlined"
