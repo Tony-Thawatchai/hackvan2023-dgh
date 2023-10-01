@@ -1,6 +1,5 @@
 import householdSchema from '../model/householdSchema.js';
 
-
 class Household {
 
   // Create and Save a new Household

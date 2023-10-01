@@ -11,6 +11,7 @@ const datesServed = new DatesServed();
 // Client routes
 router.post("/client/create", client.create);
 router.get("/client/:id/update", client.update);
+router.get("/client/all", client.getAll);
 router.get("/household/:id/clients", client.findAllInHousehold);
 router.get("/client/search/:field/:value", client.findAllCriteriaMatch);
 router.delete("/client/:id/remove", client.remove);
