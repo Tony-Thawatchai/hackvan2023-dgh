@@ -24,7 +24,7 @@ export const create = asyncHandler(async (req, res) => {
         client.phone = req.body.phone;
     }
 
-    client.save(client)
+    client.save()
         .then(data => {
             res.send(data);
         }).catch(err => {
@@ -39,7 +39,7 @@ export const findAllInHousehold = asyncHandler(async (req, res) => {
     const householdId = req.query.householdId;
     var condition = householdId ? { householdId: { $match: householdId } } : {};
 
-    Client.find(condition).then(data => {
+    clientSchema.find(condition).then(data => {
         res.send(data);
     }).catch(err => {
         res.status(500).send({
@@ -48,12 +48,23 @@ export const findAllInHousehold = asyncHandler(async (req, res) => {
     })
 });
 
+export const getAll = asyncHandler(async (req, res) => {
+    clientSchema.find().then(data => {
+        res.send(data);
+    }).catch(err => {
+        res.status(500).send({
+            message: err.message || 'An error occurred while retrieving clients.'
+        });
+    })
+});
+
+
 // returns all client matching a criteria
 export const findAllCriteriaMatch = asyncHandler(async (req, res) => {
     const field = req.query.field;
     const value = req.query.value;
     var condition = field ? { field: { $match: value } } : {};
-    Client.find(condition).then(data => {
+    clientSchema.find(condition).then(data => {
         res.send(data);
     }).catch(err => {
         res.status(500).send({

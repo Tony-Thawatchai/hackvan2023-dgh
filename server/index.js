@@ -2,6 +2,7 @@ import dotenv from "dotenv";
 import express from "express";
 import mongoose from "mongoose";
 import router from "./routes/router.js";
+// import clientRouter from "./routes/client.js";
 import cors from "cors";
 import bodyParser from "body-parser";
 
@@ -40,6 +41,7 @@ app.use(bodyParser.urlencoded({ extended: true }));
 
 // const clientRoute = require('./routes/client');
 app.use("/", router);
+// app.use("/client", clientRouter);
 
 app.listen(port, () => {
   console.log(`Example app listening at ${process.env.HOSTNAME}${port}`);

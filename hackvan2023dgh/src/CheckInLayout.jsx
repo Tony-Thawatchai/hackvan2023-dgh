@@ -41,7 +41,7 @@ function CheckInLayout() {
         //   `http://localhost:3000/client/getone/address/${inputText}`
         // );
         const response = await fetch(
-          `${process.env.REACT_APP_API_PORT}/client/getone/address/${inputText}`
+          `${process.env.REACT_APP_API_PORT}/household/search/address/${inputText}`
         );
 
         if (!response.ok) {

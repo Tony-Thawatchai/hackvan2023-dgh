@@ -1,18 +1,17 @@
 import householdSchema from '../model/householdSchema.js';
 
-
 class Household {
 
   // Create and Save a new Household
   create = (req, res) => {
     // Validate request
-    if (!req.body.name) {
+    if (!req.body) {
       res.status(400).send({ message: 'Content can not be empty!' });
       return;
     }
 
     // Create a Household
-    const household = new Household({
+    const household = new householdSchema({
       name: req.body.name,
       address: req.body.address,
       postalCode: req.body.postalCode,
@@ -23,7 +22,7 @@ class Household {
 
     // Save Household in the database
     household
-      .save(household)
+      .save()
       .then((data) => {
         res.send(data);
       })
