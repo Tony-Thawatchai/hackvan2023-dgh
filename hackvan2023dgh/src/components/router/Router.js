@@ -5,11 +5,7 @@ import FormLayout from '../../FormLayout'
 import ReportLayout from '../../ReportLayout'
 import LoginLayout from '../../LoginLayout'
 import SingelClientLayout from '../SingelClientLayout'
-<<<<<<< HEAD
 import React from 'react'
-=======
-import React from "react";
->>>>>>> main
 const Router = createBrowserRouter([
     { path: '/', element: <LoginLayout /> },
     { path: '/volunteerhome', element: <Home /> },
