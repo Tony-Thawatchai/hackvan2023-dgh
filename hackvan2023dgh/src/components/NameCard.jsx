@@ -3,21 +3,28 @@ import CheckinBTN from "./CheckinBTN";
 import { useState } from "react";
 
 const container = {
+  backgroundColor: "#F0F0F0",
+  // backgroundColor:"gold",
   width: "80%",
   maxWidth: "900px",
-  border: "1px solid #000",
+  padding: "1rem",
+  // border: "1px solid #000",
   borderRadius: "10px",
   display: "flex",
+  // justifyContent: "space-between",
   justifyContent: "space-around",
-  alignItems: "center",
+  alignItems: "start",
   flexWrap: "wrap",
+  flexDirection: "column",
   gap: "1rem",
 };
 
 const item = {
-  flex: 1,
-  flexBasis: "25%",
-  // backgroundColor: "hotpink",
+  display: "flex",
+  // flexBasis: "100%",
+  // maxWidth: "400px",
+  flexDirection: "row",
+  justifyContent: "start",
 };
 
 function NameCard({ data }) {
@@ -35,7 +42,7 @@ function NameCard({ data }) {
         ...data,
         servedDate: new Date().toLocaleDateString(),
       };
-      
+
       try {
         console.log("🚀 ~ file: NameCard.jsx:35 ~ patchData:", patchData);
         const response = await fetch(
@@ -68,32 +75,98 @@ function NameCard({ data }) {
   console.log(updateData);
 
   return (
-    <div style={container}>
-      <div style={item}>
-        <h3 style={{ fontWeight: "normal" }}>Name:</h3>
-        <h3> {updateData.name}</h3>
-      </div>
-      <div style={item}>
-        <h3 style={{ fontWeight: "normal" }}>Address:</h3>
-        <h3> {updateData.address}</h3>
-      </div>
-      <div style={item}>
-        <h3 style={{ fontWeight: "normal" }}>last served:</h3>
-        <h3> {updateData.servedDate}</h3>
-        {/* <h3> {isChanged ? "2023-09-30"  : updateData.servedDate}</h3> */}
-      </div>
-      <div style={item}>
-        <h3 style={{ fontWeight: "normal" }}>Family mount:</h3>
-        <h3> {updateData.FamilyMount}</h3>
+    <div style={{backgroundColor: "#F0F0F0", display:"flex", minWidth:"80%", justifyContent:"space-around"}}>
+      <div style={container}>
+        <div style={item}>
+          <h3
+            style={{
+              fontWeight: "normal",
+              fontSize: "clamp(1rem, 1.25rem, 2rem)",
+              fontWeight: "bold",
+              display: "inline",
+            }}
+          >
+            Name:
+          </h3>
+          <h3
+            style={{
+              fontSize: "clamp(1rem, 1.25rem, 2rem)",
+              display: "inline",
+            }}
+          >
+            {" "}
+            {updateData.name}
+          </h3>
+        </div>
+        <div style={item}>
+          <h3
+            style={{
+              fontWeight: "normal",
+              fontSize: "clamp(1rem, 1.25rem, 2rem)",
+              fontWeight: "bold",
+              display: "inline",
+            }}
+          >
+            Address:
+          </h3>
+          <h3
+            style={{
+              fontSize: "clamp(1rem, 1.25rem, 2rem)",
+              display: "inline",
+            }}
+          >
+            {" "}
+            {updateData.address}
+          </h3>
+        </div>
+        <div style={item}>
+          <h3
+            style={{
+              fontWeight: "normal",
+              fontSize: "clamp(1rem, 1.25rem, 2rem)",
+              fontWeight: "bold",
+              display: "inline",
+            }}
+          >
+            last served:
+          </h3>
+          <h3
+            style={{
+              fontSize: "clamp(1rem, 1.25rem, 2rem)",
+              display: "inline",
+            }}
+          >
+            {" "}
+            {updateData.servedDate}
+          </h3>
+          {/* <h3> {isChanged ? "2023-09-30"  : updateData.servedDate}</h3> */}
+        </div>
+        <div style={item}>
+          <h3
+            style={{
+              fontWeight: "normal",
+              fontSize: "clamp(1rem, 1.25rem, 2rem)",
+              fontWeight: "bold",
+              display: "inline",
+            }}
+          >
+            Family mount:
+          </h3>
+          <h3
+            style={{
+              fontSize: "clamp(1rem, 1.25rem, 2rem)",
+              display: "inline",
+            }}
+          >
+            {" "}
+            {updateData.FamilyMount}
+          </h3>
+        </div>
       </div>
       <CheckinBTN
         data={data}
         onClick={getUpdateData}
-        // onUpdate={refreshCard}
       />
-      {/* <button style={item}>
-        Check in
-      </button> */}
     </div>
   );
 }

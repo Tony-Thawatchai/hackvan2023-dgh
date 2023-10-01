@@ -1,6 +1,7 @@
 import React from "react";
 import { Button } from "@mui/material";
 import { useState } from "react";
+import ArrowForwardIosIcon from '@mui/icons-material/ArrowForwardIos';
 
 function CheckinBTN({ data, onClick }) {
   // patch request to update the last served date
@@ -35,9 +36,48 @@ function CheckinBTN({ data, onClick }) {
 
   return (
     <>
-      <Button variant="contained" onClick={handleClick}>
+      <Button 
+      // variant="contained" 
+      onClick={handleClick} 
+    
+      className="button active"
+      sx={{
+        boxShadow: "none",
+        height: "30%",
+        alignSelf: "center",
+        ":hover": {
+          backgroundColor: "#5271FF",
+          boxShadow: "none",
+        },
+        
+      }}
+      >
+        {/* <ArrowForwardIosIcon /> */}
         Check in
       </Button>
+     
+     
+     
+      {/* <Button 
+      // variant="contained" 
+      onClick={handleClick} 
+      sx={{
+        alignSelf: "center",
+        color: "black",
+      }}
+      // className="button active"
+      // sx={{
+      //   boxShadow: "none",
+      //   ":hover": {
+      //     backgroundColor: "#5271FF",
+      //     boxShadow: "none",
+      //   },
+        
+      // }}
+      >
+        <ArrowForwardIosIcon />
+        
+      </Button> */}
     </>
   );
 }

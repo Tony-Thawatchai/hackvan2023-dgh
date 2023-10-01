@@ -15,18 +15,20 @@
   background-color: #fff;
   cursor: pointer;
   transition: background-color 0.3s, color 0.3s, border-color 0.3s;
+  border-radius: .5rem;
+  padding: .5rem auto;
 }
 
 /* Styling for the active button */
 .button.active {
-  background-color: #007bff;
+  background-color: #5271FF;
   color: #fff;
-  border-color: #007bff;
+  border-color: #5271FF;
 }
 
 /* Hover effect on buttons */
 .button:hover {
-  background-color: #007bff;
-  color: #fff;
-  border-color: #007bff;
+  background-color: #5271FF;
+  color: black;
+  border-color: #5271FF;
 }
