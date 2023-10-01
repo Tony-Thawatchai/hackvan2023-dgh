@@ -9,11 +9,8 @@ import {
   Select,
   FormControl,
   InputLabel,
-  
-
 } from "@mui/material";
-import { Unstable_NumberInput as NumberInput } from '@mui/base/Unstable_NumberInput';
-
+import { Unstable_NumberInput as NumberInput } from "@mui/base/Unstable_NumberInput";
 
 const initialFamilyMember = {
   idType: "",
@@ -82,9 +79,15 @@ const FormComponent = ({ onSubmit }) => {
 
   return (
     <form
-      style={{ display: "flex", flexDirection: "column", gap: "1.5rem" }}
+      style={{
+        display: "flex",
+        flexDirection: "column",
+        gap: "1.5rem",
+        width: "100%",
+      }}
       onSubmit={handleSubmit}
     >
+      <Typography variant="h5" sx={{textAlign:"center"}}>Primary Contact</Typography>
       <TextField
         sx={{
           fontFamily: '"Proxima Nova", "-apple-system", "BlinkMacSystemFont"',
@@ -98,26 +101,47 @@ const FormComponent = ({ onSubmit }) => {
         sx={{
           fontFamily: '"Proxima Nova", "-apple-system", "BlinkMacSystemFont"',
         }}
+        label="Last 4 digits of ID"
+        value={primaryContact.idNumber}
+        onChange={(e) => handlePrimaryContactChange("idNumber", e.target.value)}
+        fullWidth
+      />
+
+      <TextField
+        sx={{
+          fontFamily: '"Proxima Nova", "-apple-system", "BlinkMacSystemFont"',
+        }}
+        label="Phone"
+        value={primaryContact.phone}
+        onChange={(e) => handlePrimaryContactChange("phone", e.target.value)}
+        fullWidth
+      />
+      <TextField
+        sx={{
+          fontFamily: '"Proxima Nova", "-apple-system", "BlinkMacSystemFont"',
+        }}
         label="Address"
-        value={primaryContact.phoneNumber}
+        value={householdData.address}
         onChange={(e) => handlePrimaryHouseholdData("address", e.target.value)}
         fullWidth
         type="tel"
       />
-
       <FormControl fullWidth>
-        <InputLabel>Status</InputLabel>
+        <InputLabel>Community</InputLabel>
         <Select
           value={primaryContact.community}
           onChange={(e) =>
-            handlePrimaryHouseholdData("completed", e.target.value)
+            handlePrimaryHouseholdData("community", e.target.value)
           }
         >
-          <MenuItem value={false}>Incomplete</MenuItem>
-          <MenuItem value={true}>Complete</MenuItem>
+          <MenuItem value="Edmond">Edmond</MenuItem>
+          <MenuItem value="Burnaby">Burnaby</MenuItem>
+          <MenuItem value="New Westminister">New Westminister</MenuItem>
+          <MenuItem value="Other">Other</MenuItem>
           {/* <MenuItem value="Other">Other</MenuItem> */}
         </Select>
       </FormControl>
+
       <FormControl fullWidth>
         <InputLabel>Gender</InputLabel>
         <Select
@@ -153,19 +177,23 @@ const FormComponent = ({ onSubmit }) => {
         }
         fullWidth
       />
-      <TextField
-        sx={{
-          fontFamily: '"Proxima Nova", "-apple-system", "BlinkMacSystemFont"',
-        }}
-        label="Week Group"
-        value={householdData.weekGroup}
-        onChange={(e) =>
-          handlePrimaryHouseholdData("weekGroup", e.target.value)
-        }
-        fullWidth
-      />
-       <FormControl fullWidth>
-        <InputLabel>Community</InputLabel>
+
+      <FormControl fullWidth>
+        <InputLabel>Week Group</InputLabel>
+        <Select
+          value={householdData.weekGroup}
+          onChange={(e) =>
+            handlePrimaryHouseholdData("weekGroup", e.target.value)
+          }
+        >
+          <MenuItem value="Orange">Orange</MenuItem>
+          <MenuItem value="Black">Black</MenuItem>
+          <MenuItem value="Yellow">Yellow</MenuItem>
+        </Select>
+      </FormControl>
+
+      <FormControl fullWidth>
+        <InputLabel>Document completed for all dependant?</InputLabel>
         <Select
           value={primaryContact.community}
           onChange={(e) =>
@@ -177,7 +205,7 @@ const FormComponent = ({ onSubmit }) => {
           {/* <MenuItem value="Other">Other</MenuItem> */}
         </Select>
       </FormControl>
-    
+
       {/* <Typography variant="h5">Family Members</Typography> */}
       {/* {familyMembers.map((familyMember, index) => (
         <Grid container spacing={2} key={index}>
