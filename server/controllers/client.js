@@ -87,3 +87,22 @@ export const update = asyncHandler(async (req, res) => {
     });
 });
 
+export const remove = asyncHandler(async (req, res) => {
+    const id = req.params.id;
+
+    clientSchema.findByIdAndRemove(id).then(data => {
+        if (!data) {
+            res.status(404).send({
+                message: `Cannot delete client with id=${id}. Client not found!`
+            });
+        } else {
+            res.send({
+                message: 'Client was deleted successfully!'
+            });
+        }
+    }).catch(err => {
+        res.status(500).send({
+            message: 'Could not delete client with id=' + id
+        });
+    });
+});
