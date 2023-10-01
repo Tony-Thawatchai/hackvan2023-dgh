@@ -1,8 +1,13 @@
-import ArrowBackIosNewIcon from "@mui/icons-material/
-import React from "react";
+
+import { useState, useEffect } from "react";
+
+
+import TextField from "@mui/material/TextField";
+import NameCard from "./NameCard";
+import ArrowBackIosNewIcon from "@mui/icons-material/ArrowBackIosNew";
 import { useNavigate } from "react-router-dom";
 
-function SingelClientLayout() {
+function SingelClientLayout({data}) {
   const navigate = useNavigate();
   return (
     <div>
@@ -21,25 +26,14 @@ function SingelClientLayout() {
       </div>
       <div className="main">
         <p className="pageDescription uppercase ">SEARCHING BY:</p>
-        <ButtonBar values={buttonItems} onSelect={handleButtonClick} />
-        <div className="search">
-          <TextField
-            id="outlined-basic"
-            onChange={(event: React.ChangeEvent<HTMLInputElement>) =>
-              handleInput(event.target.value)
-            }
-            variant="outlined"
-            fullWidth
-            label="Search"
-            // className="w-[50%]"
-          />
-        </div>
+        
 
-        {searchResults != null
-          ? searchResults.map((result, index) => (
-              <NameCard key={index} data={result} />
-            ))
-          : null}
+
+        
+          
+              <NameCard  data={data} />
+          
+          
       </div>
     </div>
   );

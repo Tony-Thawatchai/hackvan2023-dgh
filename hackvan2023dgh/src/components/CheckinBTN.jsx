@@ -14,7 +14,7 @@ function CheckinBTN({ data, onClick }) {
   const update = { ...data, servedDate: dateString };
   const handleClick = () => {
     setUpdateData(update);
-navigate('/singleClient', <SingelClientLayout /> )
+navigate('/singleClient', <SingelClientLayout data={updateData}/> )
     // onClick(updateData);
     
   };
