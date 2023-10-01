@@ -24,7 +24,7 @@ export const create = asyncHandler(async (req, res) => {
         client.phone = req.body.phone;
     }
 
-    client.save(client)
+    client.save()
         .then(data => {
             res.send(data);
         }).catch(err => {

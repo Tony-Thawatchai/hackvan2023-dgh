@@ -47,9 +47,9 @@ function NameCard({ data }) {
       try {
         console.log("🚀 ~ file: NameCard.jsx:35 ~ patchData:", patchData);
         const response = await fetch(
-          `${process.env.REACT_APP_API_PORT}/client/update/${patchData._id}`,
+          `${process.env.REACT_APP_API_PORT}/serveddates/create`,
           {
-            method: "PATCH",
+            method: "POST",
             headers: {
               "Content-Type": "application/json",
             },

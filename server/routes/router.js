@@ -12,13 +12,13 @@ const datesServed = new DatesServed();
 router.post("/client/create", client.create);
 router.get("/client/:id/update", client.update);
 router.get("/household/:id/clients", client.findAllInHousehold);
-router.get("/client/search", client.findAllCriteriaMatch);
+router.get("/client/search/:field/:value", client.findAllCriteriaMatch);
 router.delete("/client/:id/remove", client.remove);
 
 // Household routes
 router.post("/household/create", household.create);
 router.get("/household/:id/update", household.update);
-router.get("/household/search/:address", household.findByAddress);
+router.get("/household/search/address/:address", household.findByAddress);
 
 // DatesServed routes
 router.post("/datesserved/create", datesServed.create);
