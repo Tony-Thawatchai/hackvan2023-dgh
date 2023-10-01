@@ -64,100 +64,15 @@ function ReportLayout() {
   }, []);
 
   async function postToGoogleSheets(googleJsonData) {
-    // if (googleJsonData === null || googleJsonData === undefined) {
-    //   console.error("googleJsonData is null");
-    //   return;
-    // }
+    if (googleJsonData === null || googleJsonData === undefined) {
+      console.error("googleJsonData is null");
+      return;
+    }
 
     try {
         
       var myHeaders = new Headers();
       myHeaders.append("Content-Type", "text/plain;charset=utf-8");
-      
-      // var raw = JSON.stringify([
-      //   {
-      //     "_id": "6517d3ec3e350b5fb803e6c1",
-      //     "name": "Jane Doe",
-      //     "email": "a@a.col",
-      //     "address": "12 Holly St",
-      //     "__v": 0,
-      //     "FamilyMount": 3,
-      //     "servedDate": "10/1/2023"
-      //   },
-      //   {
-      //     "_id": "6517d3ee3e350b5fb803e6c3",
-      //     "name": "Nahla Fariba",
-      //     "email": "a@a.col",
-      //     "address": "188 Bidwell st.",
-      //     "__v": 0,
-      //     "servedDate": "9/30/2023"
-      //   },
-      //   {
-      //     "_id": "6517dc9f9a701e3090a14018",
-      //     "name": "Client 2",
-      //     "email": "a@a.col",
-      //     "address": "123 Main St",
-      //     "__v": 0,
-      //     "servedDate": "9/30/2023"
-      //   },
-      //   {
-      //     "_id": "6517dce89a701e3090a1401e",
-      //     "name": "Client 23333",
-      //     "email": "a@a.col",
-      //     "address": "123 Main St",
-      //     "__v": 0,
-      //     "servedDate": "9/30/2023"
-      //   },
-      //   {
-      //     "_id": "6517fb924f647e050ab612ea",
-      //     "name": "Client 8888",
-      //     "address": "123 Main St",
-      //     "FamilyMount": 3,
-      //     "servedDate": "9/30/2023",
-      //     "__v": 0
-      //   },
-      //   {
-      //     "_id": "6518069316338119562a6b20",
-      //     "name": "Client 999",
-      //     "address": "23 Beach Ave",
-      //     "FamilyMount": 2,
-      //     "servedDate": "2023-09-01",
-      //     "__v": 0
-      //   },
-      //   {
-      //     "_id": "65192ad64564334857e906ca",
-      //     "householdId": "6517d3ec3e350b5fb803e6c1",
-      //     "sex": "M",
-      //     "yearOfBirth": 2000,
-      //     "isDependent": true,
-      //     "dietaryRestrictions": [],
-      //     "idType": "BCID",
-      //     "idNumber": "1234",
-      //     "__v": 0
-      //   },
-      //   {
-      //     "_id": "651949eb7d531c655ce33616",
-      //     "householdId": "6517d3ec3e350b5fb803e6c1",
-      //     "sex": "M",
-      //     "yearOfBirth": 2000,
-      //     "isDependent": true,
-      //     "dietaryRestrictions": [],
-      //     "idType": "BCID",
-      //     "idNumber": "1234",
-      //     "__v": 0
-      //   },
-      //   {
-      //     "_id": "65194a0c967d5e7f6dcb277c",
-      //     "householdId": "6517d3ec3e350b5fb803e6c1",
-      //     "sex": "M",
-      //     "yearOfBirth": 2000,
-      //     "isDependent": true,
-      //     "dietaryRestrictions": [],
-      //     "idType": "BCID",
-      //     "idNumber": "1234",
-      //     "__v": 0
-      //   }
-      // ]);
       
       var data = JSON.stringify(googleJsonData);
 
