@@ -67,7 +67,7 @@ function ReportLayout() {
 
         let requestOptions = {
           method: 'POST',
-          body: [jsonData],
+          body: jsonData,
           redirect: 'follow'
         };
         
