@@ -4,6 +4,7 @@ import { useState, useEffect } from "react";
 import ButtonBar from "./components/ButtonBar";
 import TextField from "@mui/material/TextField";
 import NameCard from "./components/NameCard";
+import ArrowBackIosNewIcon from "@mui/icons-material/ArrowBackIosNew";
 
 function CheckInLayout() {
   const buttonItems = ["name", "address", "phone"];
@@ -59,30 +60,43 @@ function CheckInLayout() {
   }, [inputText]);
 
   return (
-    <div className="main">
-      <h1>Client List</h1>
-      <ButtonBar values={buttonItems} onSelect={handleButtonClick} />
-      <div className="search">
-        <TextField
-          id="outlined-basic"
-          onChange={(event: React.ChangeEvent<HTMLInputElement>) =>
-            handleInput(event.target.value)
-          }
-          variant="outlined"
-          fullWidth
-          label="Search"
-        />
+    <div >
+      <div className=" topBar"></div>
+      <div className=" w-full text-center h-[30%] flex flex-col items-center justify-around  p-[4%] ">
+        
+        <div className="w-[50%] mx-auto">
+          <h1 className="pageHeadline">Check-in a Client</h1>
+        </div>
       </div>
-      <p>Category: {selectedValue}</p>
+      <div className="main">
+        <p className="pageDescription ">SEARCHING BY:</p>
+        <ButtonBar values={buttonItems} onSelect={handleButtonClick} />
+        <div className="search">
+          <TextField
+            id="outlined-basic"
+            onChange={(event: React.ChangeEvent<HTMLInputElement>) =>
+              handleInput(event.target.value)
+            }
+            variant="outlined"
+            fullWidth
+            label="Search"
+            // className="w-[50%]"
+          />
+        </div>
+        
 
-      {searchResults != null
-        ? searchResults.map((result, index) => (
-          
-            <NameCard 
-            key={index}
-             data={result} />
-          ))
-        : null}
+        {searchResults != null
+          ? searchResults.map((result, index) => (
+              <NameCard key={index} data={result} />
+            ))
+          : null}
+      
+      <button className="  backBTN ">
+          {" "}
+          <ArrowBackIosNewIcon /> Back
+        </button>
+      </div>
+      
     </div>
   );
 }
