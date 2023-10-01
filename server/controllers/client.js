@@ -11,6 +11,8 @@ export const create = asyncHandler(async (req, res) => {
 
     const client = new clientSchema({
         householdId: req.body.householdId,
+        // name: req.body.name,
+        // phone: req.body.phone,
         sex: req.body.sex,
         yearOfBirth: req.body.yearOfBirth,
         isDependent: req.body.isDependent,
@@ -18,6 +20,7 @@ export const create = asyncHandler(async (req, res) => {
         idType: req.body.idType,
         idNumber: req.body.idNumber,
     });
+    console.log('client body',req.body)
 
     if (!req.body.isDependent) {
         client.name = req.body.name;
@@ -31,6 +34,7 @@ export const create = asyncHandler(async (req, res) => {
             res.status(500).send({
                 message: err.message || 'An error occurred while creating the client.'
             });
+            console.log(err);
         })
 });
 

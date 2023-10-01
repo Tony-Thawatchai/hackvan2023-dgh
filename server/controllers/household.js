@@ -19,12 +19,16 @@ class Household {
       email: req.body.email,
       active: req.body.active ? req.body.active : false,
     });
+console.log('res.body',req.body)
+    console.log('Household', household);
 
     // Save Household in the database
-    household
+    return household
       .save()
       .then((data) => {
-        res.send(data);
+
+        console.log('Household created successfully', data);
+        return res.send(data);
       })
       .catch((err) => {
         res.status(500).send({
