@@ -6,11 +6,13 @@ import TextField from "@mui/material/TextField";
 import NameCard from "./components/NameCard";
 import CheckInLayout from "./CheckInLayout";
 import FormLayout from "./FormLayout";
+import UpdateForm from "./components/UpdateForm";
 import {
   createBrowserRouter,
   RouterProvider,
 } from "react-router-dom";
 import Router from "./components/router/Router";
+import FormComponent from "./components/FormComponent";
 
 function App() {
   const buttonItems = ["Check in", "New Client","Update data"];
@@ -23,6 +25,7 @@ function App() {
     <RouterProvider  router={Router}>
 
     </RouterProvider>
+    
     // <div className="main">
     //   {buttonItems.map((item) => (
     //     <button key={item} className="button" onClick={() => handleButtonClick(item)}>
