@@ -10,7 +10,7 @@ import { useNavigate } from "react-router-dom";
 
 function Home() {
   const navigate = useNavigate();
-  const buttonItems = ["Check in", "New Client", "Update data"];
+  const buttonItems = ["Check in", "First-time Client", "Update data"];
   const [selectedValue, setSelectedValue] = useState("");
   useEffect(() => {
     if (selectedValue) {
@@ -25,7 +25,7 @@ function Home() {
 
   return (
     <div className="main">
-      <div className="bg-secondary w-full text-center h-[30%] flex flex-col align-middle justify-center ">
+      <div className="bg-secondary w-full text-center h-[30vh] flex flex-col align-middle justify-center ">
         <h1 className="text-3xl font-bold">Volunteer</h1>
         <p>What are you helping your client today?</p>
       </div>

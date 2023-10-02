@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import { useNavigate } from "react-router-dom";
 import {
   TextField,
   MenuItem,
@@ -10,7 +11,7 @@ import {
   FormControl,
   InputLabel,
 } from "@mui/material";
-import { Unstable_NumberInput as NumberInput } from "@mui/base/Unstable_NumberInput";
+import ArrowBackIosNewIcon from "@mui/icons-material/ArrowBackIosNew";
 
 const initialFamilyMember = {
   idType: "",
@@ -19,7 +20,8 @@ const initialFamilyMember = {
   sex: "",
 };
 
-const FormComponent = ({ onSubmit }) => {
+const   FormComponent = ({ onSubmit }) => {
+  const navigate = useNavigate();
   const [primaryContact, setPrimaryContact] = useState({
     //  ! receive data from the Props
     // householdId: mongoose.Schema.Types.ObjectId,
@@ -40,12 +42,13 @@ const FormComponent = ({ onSubmit }) => {
     weekGroup: "",
     numMouths: "",
     completed: false,
-    notes: [],
+    notes: "",
   });
   const [familyMembers, setFamilyMembers] = useState([
     { idType: "", idNumber: "", birthYear: "", sex: "" },
   ]);
   const handleSubmit = (e) => {
+    
     e.preventDefault();
 
     // Construct the form data object
@@ -55,6 +58,7 @@ const FormComponent = ({ onSubmit }) => {
     };
 
     onSubmit(formData);
+    console.log(formData);
   };
 
   const handlePrimaryContactChange = (field, value) => {
@@ -87,10 +91,13 @@ const FormComponent = ({ onSubmit }) => {
       }}
       onSubmit={handleSubmit}
     >
-      <Typography variant="h5" sx={{textAlign:"center"}}>Primary Contact</Typography>
+      <Typography variant="h5" sx={{ textAlign: "center" }}>
+        Primary Contact
+      </Typography>
       <TextField
         sx={{
           fontFamily: '"Proxima Nova", "-apple-system", "BlinkMacSystemFont"',
+          backgroundColor: "#F5F5F5",
         }}
         label="Name"
         value={primaryContact.name}
@@ -100,6 +107,7 @@ const FormComponent = ({ onSubmit }) => {
       <TextField
         sx={{
           fontFamily: '"Proxima Nova", "-apple-system", "BlinkMacSystemFont"',
+          backgroundColor: "#F5F5F5",
         }}
         label="Last 4 digits of ID"
         value={primaryContact.idNumber}
@@ -110,6 +118,7 @@ const FormComponent = ({ onSubmit }) => {
       <TextField
         sx={{
           fontFamily: '"Proxima Nova", "-apple-system", "BlinkMacSystemFont"',
+          backgroundColor: "#F5F5F5",
         }}
         label="Phone"
         value={primaryContact.phone}
@@ -119,6 +128,7 @@ const FormComponent = ({ onSubmit }) => {
       <TextField
         sx={{
           fontFamily: '"Proxima Nova", "-apple-system", "BlinkMacSystemFont"',
+          backgroundColor: "#F5F5F5",
         }}
         label="Address"
         value={householdData.address}
@@ -129,6 +139,7 @@ const FormComponent = ({ onSubmit }) => {
       <FormControl fullWidth>
         <InputLabel>Community</InputLabel>
         <Select
+          sx={{ backgroundColor: "#F5F5F5" }}
           value={primaryContact.community}
           onChange={(e) =>
             handlePrimaryHouseholdData("community", e.target.value)
@@ -145,6 +156,7 @@ const FormComponent = ({ onSubmit }) => {
       <FormControl fullWidth>
         <InputLabel>Gender</InputLabel>
         <Select
+          sx={{ backgroundColor: "#F5F5F5" }}
           value={householdData.sex}
           onChange={(e) => handlePrimaryContactChange("sex", e.target.value)}
         >
@@ -158,6 +170,7 @@ const FormComponent = ({ onSubmit }) => {
       <TextField
         sx={{
           fontFamily: '"Proxima Nova", "-apple-system", "BlinkMacSystemFont"',
+          backgroundColor: "#F5F5F5",
         }}
         label="Year of Birth"
         value={primaryContact.yearOfBirth}
@@ -169,18 +182,51 @@ const FormComponent = ({ onSubmit }) => {
       <TextField
         sx={{
           fontFamily: '"Proxima Nova", "-apple-system", "BlinkMacSystemFont"',
+          backgroundColor: "#F5F5F5",
+        }}
+        label="Native language"
+        // value={primaryContact.yearOfBirth}
+        // onChange={(e) =>
+        //   handlePrimaryContactChange("yearOfBirth", e.target.value)
+        // }
+        fullWidth
+      />
+
+      <TextField
+        sx={{
+          fontFamily: '"Proxima Nova", "-apple-system", "BlinkMacSystemFont"',
+
+          backgroundColor: "#F5F5F5",
+        }}
+        label="Additional notes"
+        value={householdData.notes}
+        onChange={(e) => handlePrimaryContactChange("notes", e.target.value)}
+        multiline
+        rows={4}
+        fullWidth
+      />
+
+      <Typography variant="h5" sx={{ textAlign: "center", marginTop: "3rem" }}>
+        Has dependant?
+      </Typography>
+      <TextField
+        sx={{
+          fontFamily: '"Proxima Nova", "-apple-system", "BlinkMacSystemFont"',
+          backgroundColor: "#F5F5F5",
         }}
         label="Family Mounths"
         value={householdData.numMouths}
-        onChange={(e) =>
-          handlePrimaryHouseholdData("numMouths", e.target.value)
-        }
+        onChange={(e) => {
+          handlePrimaryHouseholdData("numMouths", e.target.value);
+          setFamilyAmount(e.target.value);
+        }}
         fullWidth
       />
 
       <FormControl fullWidth>
         <InputLabel>Week Group</InputLabel>
         <Select
+          sx={{ backgroundColor: "#F5F5F5" }}
           value={householdData.weekGroup}
           onChange={(e) =>
             handlePrimaryHouseholdData("weekGroup", e.target.value)
@@ -195,6 +241,7 @@ const FormComponent = ({ onSubmit }) => {
       <FormControl fullWidth>
         <InputLabel>Document completed for all dependant?</InputLabel>
         <Select
+          sx={{ backgroundColor: "#F5F5F5" }}
           value={primaryContact.community}
           onChange={(e) =>
             handlePrimaryHouseholdData("completed", e.target.value)
@@ -213,6 +260,7 @@ const FormComponent = ({ onSubmit }) => {
             <FormControl fullWidth>
               <InputLabel>ID type</InputLabel>
               <Select
+              sx={{backgroundColor: "#F5F5F5"}}
                 value={familyMember.idType}
                 onChange={(e) =>
                   handleFamilyMemberChange(index, "idType", e.target.value)
@@ -228,6 +276,7 @@ const FormComponent = ({ onSubmit }) => {
             <TextField
             sx={{
           fontFamily: '"Proxima Nova", "-apple-system", "BlinkMacSystemFont"',
+          backgroundColor: "#F5F5F5",
         }}
               label="ID last 4 digits"
               value={familyMember.idNumber}
@@ -241,6 +290,7 @@ const FormComponent = ({ onSubmit }) => {
             <TextField
             sx={{
           fontFamily: '"Proxima Nova", "-apple-system", "BlinkMacSystemFont"',
+          backgroundColor: "#F5F5F5",
         }}
               label="Birth Year"
               value={familyMember.birthYear}
@@ -254,6 +304,7 @@ const FormComponent = ({ onSubmit }) => {
             <FormControl fullWidth>
               <InputLabel>Sex</InputLabel>
               <Select
+              sx={{backgroundColor: "#F5F5F5"}}
                 value={familyMember.sex}
                 onChange={(e) =>
                   handleFamilyMemberChange(index, "sex", e.target.value)
@@ -271,10 +322,78 @@ const FormComponent = ({ onSubmit }) => {
       {/* <IconButton color="primary" onClick={handleAddFamilyMember}>
         <Typography variant="body1">+</Typography>
       </IconButton> */}
-
-      <Button variant="contained" color="primary" type="submit">
-        Submit
-      </Button>
+      {familyAmount == 0 && (
+        <Button
+          sx={{
+            boxShadow: "none",
+            
+            
+            backgroundColor: "#5271FF",
+            ":hover": {
+              backgroundColor: "#F0F0F0",
+              color: "black",
+              border: "1px solid #5271FF",
+              boxShadow: "none",
+            },
+          }}
+          variant="contained"
+          color="primary"
+          type="submit"
+          disabled
+        >
+          Submit
+        </Button>
+      )}
+      {familyAmount == 1 && (
+        <Button
+          sx={{
+            boxShadow: "none",
+            
+            
+            backgroundColor: "#5271FF",
+            ":hover": {
+              backgroundColor: "#F0F0F0",
+              color: "black",
+              border: "1px solid #5271FF",
+              boxShadow: "none",
+            },
+          }}
+          variant="contained"
+          color="primary"
+          type="submit"
+          // onClick to submit form
+          onClick={handleSubmit}
+        >
+          Submit
+        </Button>
+      )}
+      {familyAmount > 1 && (
+        <Button
+          sx={{
+            boxShadow: "none",
+            
+            
+            backgroundColor: "#5271FF",
+            ":hover": {
+              backgroundColor: "#F0F0F0",
+              color: "black",
+              border: "1px solid #5271FF",
+              boxShadow: "none",
+            },
+          }}
+          variant="contained"
+          color="primary"
+          type="submit"
+          // onClick to add dependant
+          onClick={() => {
+            handleSubmit
+            navigate("/addDepedant")
+          }}
+        >
+          Next
+        </Button>
+      )}
+      
     </form>
   );
 };

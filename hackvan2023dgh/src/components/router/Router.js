@@ -5,14 +5,18 @@ import FormLayout from '../../FormLayout'
 import ReportLayout from '../../ReportLayout'
 import LoginLayout from '../../LoginLayout'
 import SingelClientLayout from '../SingelClientLayout'
+import AddDependant from '../AddDependant'
 import React from 'react'
+
+
 const Router = createBrowserRouter([
     { path: '/', element: <LoginLayout /> },
     { path: '/volunteerhome', element: <Home /> },
     { path: '/Check in', element: <CheckInLayout /> },
-    {path: '/New Client', element:<FormLayout/>},
+    {path: '/First-time Client', element:<FormLayout/>},
     {path: '/Update data', element:<ReportLayout/> },
-    {path:'/singleClient', element:<SingelClientLayout /> }
+    {path:'/singleClient', element:<SingelClientLayout /> },
+    {path:'/addDepedant', element: <AddDependant />}
 ])
 
 export default Router

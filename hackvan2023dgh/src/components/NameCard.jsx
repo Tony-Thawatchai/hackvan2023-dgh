@@ -99,7 +99,7 @@ function NameCard({ data }) {
             }}
           >
             {" "}
-            {updateData.name}
+            {updateData.name || "Sam"}
           </h3>
         </div>
         <div style={item}>
@@ -120,7 +120,7 @@ function NameCard({ data }) {
             }}
           >
             {" "}
-            {updateData.address}
+            {updateData.addres || "1234 Main St"}
           </h3>
         </div>
         <div style={item}>
@@ -141,7 +141,7 @@ function NameCard({ data }) {
             }}
           >
             {" "}
-            {updateData.date}
+            {updateData.date || "2023-09-01"}
           </h3>
           {/* <h3> {isChanged ? "2023-09-30"  : updateData.servedDate}</h3> */}
         </div>
@@ -163,7 +163,7 @@ function NameCard({ data }) {
             }}
           >
             {" "}
-            {updateData.numMouths}
+            {updateData.numMouths || 4}
           </h3>
         </div>
       </div>

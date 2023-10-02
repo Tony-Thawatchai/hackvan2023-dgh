@@ -45,7 +45,7 @@ const getLatestDateServedByHousehold = async (householdId) => {
 };
 const CheckInLayout = () => {
   const navigate = useNavigate();
-  const buttonItems = ["name", "address", "phone"];
+  const buttonItems = ["address", "name", "phone"];
   const [selectedValue, setSelectedValue] = useState("");
   const handleButtonClick = (value) => {
     setSelectedValue(value);
